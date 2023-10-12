@@ -67,9 +67,11 @@ int	window(t_data cub)
 int	main(int ac, char **av)
 {
 	t_data	cub;
-	int		i;
+	(void)ac;
+	(void)av;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	/* PARSING
 	if (argc != 2)
 	{

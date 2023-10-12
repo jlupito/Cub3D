@@ -17,9 +17,9 @@ int	handle_keypress(int keysym, t_data *cub)
 
 int	handle_buttonpress(t_data *cub)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
 	cub->win_ptr = NULL;
 	mlx_destroy_image(cub->mlx_ptr, cub->mlx_img);

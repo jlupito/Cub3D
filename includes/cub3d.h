@@ -9,8 +9,8 @@
 # include <X11/keysym.h>
 
 # define BLACK_PIXEL 0x000000
-# define WINDOW_WIDTH 1800
-# define WINDOW_HEIGHT 1200
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 typedef struct s_map {
 	int		nbline;

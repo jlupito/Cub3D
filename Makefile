@@ -8,7 +8,7 @@ MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 #source
 SRCS_DIR = sources/
-SRCS = main.c \
+SRCS = main.c hooks.c \
 
 SRCS_PREFIXED = $(addprefix $(SRCS_DIR), $(SRCS))
 

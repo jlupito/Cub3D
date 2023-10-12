@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:44:50 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/09/18 18:05:58 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:08:35 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-char			*ft_mallocone(void);
-char			**ft_split_equals(char *s);
 
 // GNL Functions
 char			*get_next_line(int fd);
