@@ -24,10 +24,10 @@ void	render_background(t_data *cub, int color)
 	int	j;
 
 	i = 0;
-	while (i < WINDOW_HEIGHT)
+	while (i < WIN_HEIGHT)
 	{
 		j = 0;
-		while (j < WINDOW_WIDTH)
+		while (j < WIN_WIDTH)
 			img_pix_put(cub, j++, i, color);
 		++i;
 	}
@@ -37,50 +37,41 @@ int	render(t_data *cub)
 {	
 	if (cub->win_ptr == NULL)
 		return (-1);
-	render_background(cub, BLACK_PIXEL);
+	render_background(cub, BLACK_PIX);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, cub->mlx_img, 0, 0);
 	return (0);
 }
 
-int	window(t_data cub)
+int	start_game(t_data *data)
 {
-	cub.mlx_ptr = mlx_init();
-	if (!cub.mlx_ptr)
-		return (-1);
-	cub.win_ptr = mlx_new_window(cub.mlx_ptr,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "cub");
-	if (!cub.win_ptr)
-		return (free(cub.win_ptr), -1);
-	cub.mlx_img = mlx_new_image(cub.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	cub.addr = mlx_get_data_addr(cub.mlx_img, &cub.bpp,
-			&cub.line_len, &cub.endian);
-	mlx_loop_hook(cub.mlx_ptr, &render, &cub);
-	mlx_hook(cub.win_ptr, KeyPress, KeyPressMask, handle_keypress, &cub);
-	mlx_hook(cub.win_ptr, 17, 0, handle_buttonpress, &cub);
-	mlx_loop(cub.mlx_ptr);
-	mlx_destroy_image(cub.mlx_ptr, cub.mlx_img);
-	mlx_destroy_display(cub.mlx_ptr);
-	free(cub.mlx_ptr);
+	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		return (EXIT_FAILURE);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	if (!data->win_ptr)
+		return (free(data->win_ptr), EXIT_FAILURE);
+	data->mlx_img = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->img->addr = mlx_get_data_addr(data->mlx_img, &data->img->bpp,
+			&data->img->line_len, &data->img->endian);
+	mlx_loop_hook(data->mlx_ptr, &render, &data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, &data);
+	mlx_hook(data->win_ptr, 17, 0, handle_buttonpress, &data);
+	mlx_loop(data->mlx_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->mlx_img);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_data	cub;
-	(void)ac;
-	(void)av;
-	// int		i;
+	t_data	*data;
 
-	// i = 0;
-	/* PARSING
-	if (argc != 2)
-	{
-		error_message(4);
-		return (-1);
-	}
-	else if (check_map(argv[1]) == -1)
-		return (-1);
-	fill_map(argv[1], &cub);*/
-	window(cub);
+	if (check_args(ac, av))
+		return (EXIT_FAILURE);
+	data = save_data(av[1]);
+	if (!data)
+		return (EXIT_FAILURE);
+	start_game(data);
 	return (0);
 }
