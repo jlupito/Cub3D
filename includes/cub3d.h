@@ -15,6 +15,7 @@
 
 typedef struct s_map {
 	char	**map;
+	int		nb_line;
 	char	*no_text;
 	char	*so_text;
 	char	*we_text;
@@ -78,7 +79,24 @@ typedef struct s_data {
 	t_player	*player;
 }					t_data;
 
-int			handle_keypress(int keysym, t_data *cub);
-int			handle_buttonpress(t_data *cub);
+/********** HOOKS ***********/
+int		handle_keypress(int keysym, t_data *cub);
+int		handle_buttonpress(t_data *cub);
+
+/********** INIT ***********/
+int		save_data(char *infile, t_data *data, int flag);
+int		init_data(t_data *data);
+int		check_args(int ac, char **av);
+
+/********** MAP ***********/
+int		fill_colors(char *str, t_data *data);
+int		fill_text(char *str, t_data *data);
+int		text_colors_filled(t_data *data);
+int		fill_map(char *str, t_data *data, int i);
+
+/********** UTILS ***********/
+void	free_tabs(char **tabs);
+void	free_all(t_data *data);
+void	print_map(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:48:22 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/10/02 15:00:46 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:57:03 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = malloc(1);
 		if (!s1)
 			return (NULL);
+		s1[0] = '\0';
 	}
-	i = 0;
+	i = -1;
 	dst = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dst)
 		return (NULL);
-	while (s1[i])
-	{
+	while (s1[++i])
 		dst[i] = s1[i];
-		i++;
-	}
 	j = 0;
 	while (s2[j])
 		dst[i++] = s2[j++];
 	dst[i] = '\0';
+	if (s1)
+		free(s1);
 	return (dst);
 }
 

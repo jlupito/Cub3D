@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:44:50 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/10/12 14:08:35 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:44:49 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char			*ft_strcpy(char *dst, const char *src);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlen(const char *s);
-int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_strncmp(char *s1, char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
 char			*ft_strrchr(char *s, int c);
