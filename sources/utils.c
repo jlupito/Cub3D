@@ -3,7 +3,7 @@
 
 int	init_data(t_data *data)
 {
-	data->map = malloc(sizeof(t_map));
+	data->map = malloc(sizeof(t_map) * 1);
 	if (!data->map)
 		return (1);
 	data->map->map = NULL;
@@ -21,20 +21,21 @@ int	init_data(t_data *data)
 	return (0);
 }
 
-void	free_tabs(char **tabs)
+void	free_tabs(char **tab)
 {
 	int	i;
 
-	i = -1;
-	if (!tabs)
+	i = 0;
+	if (!tab)
 		return ;
-	while (tabs[++i])
+	while (tab[i])
 	{
-		if (tabs[i])
-			free(tabs[i]);
+		if (tab[i])
+			free(tab[i]);
+		i++;
 	}
-	if (tabs)
-		free(tabs);
+	if (tab)
+		free(tab);
 }
 
 void	free_all(t_data *data)
@@ -47,6 +48,10 @@ void	free_all(t_data *data)
 		free(data->map->we_text);
 	if (data->map->ea_text)
 		free(data->map->ea_text);
+	if (data->map->rgb_ceiling[3])
+		free(data->map->rgb_ceiling);
+	if (data->map->rgb_floor[3])
+		free(data->map->rgb_floor);
 	if (data->map->map)
 		free_tabs(data->map->map);
 	if (data->map)
@@ -69,7 +74,10 @@ void	print_map(t_data *data)
 	i = -1;
 	while (++i < 3)
 		printf("rgb_floor: %d\n", data->map->rgb_floor[i]);
-	i = -1;
-	while (++i < data->map->nb_line)
+	i = 0;
+	while (data->map->map[i])
+	{
 		printf("map: %s\n", data->map->map[i]);
+		i++;
+	}
 }

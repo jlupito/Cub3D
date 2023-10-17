@@ -15,14 +15,15 @@ int	fill_map(char *str, t_data *data, int i)
 {
 	if (i == 0)
 	{
-		data->map->map = malloc(sizeof(char *) * data->map->nb_line);
+		data->map->map = malloc(sizeof(char *) * (data->map->nb_line + 1));
 		if (!data->map->map)
 			return (1);
 	}
-	data->map->map[i] = malloc(sizeof(char) * ft_strlen(str));
+	data->map->map[i] = ft_strdup(str);
 	if (!data->map->map[i])
 		return (1);
-	data->map->map[i] = ft_strdup(str);
+	if (i == (data->map->nb_line - 1))
+		data->map->map[i + 1] = NULL;
 	return (0);
 }
 
@@ -31,7 +32,6 @@ int	fill_colors(char *str, t_data *data)
 	char	**tmp;
 	int		i;
 
-	// tmp = NULL;
 	if (str[0] == 'F')
 	{
 		str++;
@@ -104,17 +104,22 @@ int	save_data(char *infile, t_data *data, int flag)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if ((line[0] == 'F' || line[0] == 'C') && text_colors_filled(data))
+		if (line[0] == 'F' || line[0] == 'C')
 		{
-			if (fill_colors(line, data))
-				return (free(line), 1);
+			if (text_colors_filled(data))
+			{
+				if (fill_colors(line, data))
+					return (free(line), 1);
+			}
 		}
-		else if ((!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "EA", 2)
-				|| !ft_strncmp(line, "SO", 2) || !ft_strncmp(line, "WE", 2))
-			&& text_colors_filled(data))
+		else if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "EA", 2)
+			|| !ft_strncmp(line, "SO", 2) || !ft_strncmp(line, "WE", 2))
 		{
-			if (fill_text(line, data))
-				return (free(line), 1);
+			if (text_colors_filled(data))
+			{
+				if (fill_text(line, data))
+					return (free(line), 1);
+			}
 		}
 		else if (!text_colors_filled(data) && line[0] != '\n')
 		{
@@ -128,7 +133,8 @@ int	save_data(char *infile, t_data *data, int flag)
 		free(line);
 		line = get_next_line(fd);
 	}
-	data->map->nb_line = i;
+	if (!flag)
+		data->map->nb_line = i;
 	(free(line), close(fd));
 	return (0);
 }

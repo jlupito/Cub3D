@@ -95,7 +95,7 @@ int		text_colors_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
 
 /********** UTILS ***********/
-void	free_tabs(char **tabs);
+void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	print_map(t_data *data);
 

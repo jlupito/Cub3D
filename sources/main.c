@@ -69,15 +69,15 @@ int	main(int ac, char **av)
 
 	if (check_args(ac, av))
 		return (EXIT_FAILURE);
-	data = malloc(sizeof(t_data));
+	data = malloc(sizeof(t_data) * 1);
 	if (!data)
 		return (EXIT_FAILURE);
 	if (init_data(data))
-		return (free_all(data), 1);
+		return (free_all(data), EXIT_FAILURE);
 	if (save_data(av[1], data, 0))
-		return (free_all(data), 1);
+		return (free_all(data), EXIT_FAILURE);
 	if (save_data(av[1], data, 1))
-		return (free_all(data), 1);
+		return (free_all(data), EXIT_FAILURE);
 	// start_game(data);
 	print_map(data);
 	free_all(data);

@@ -1,0 +1,6 @@
+sources/*/*.o
+sources/*.o
+libft/*.o
+libft/libft.a
+./cub3D
+*.txt
