@@ -34,7 +34,7 @@
 // }
 
 // int	render(t_data *cub)
-// {	
+// {
 // 	if (cub->win_ptr == NULL)
 // 		return (-1);
 // 	render_background(cub, BLACK_PIX);
@@ -77,6 +77,8 @@ int	main(int ac, char **av)
 	if (save_data(av[1], data, 0))
 		return (free_all(data), EXIT_FAILURE);
 	if (save_data(av[1], data, 1))
+		return (free_all(data), EXIT_FAILURE);
+	if (parsing())
 		return (free_all(data), EXIT_FAILURE);
 	// start_game(data);
 	print_map(data);

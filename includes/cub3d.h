@@ -13,15 +13,20 @@
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
+# define WALL 1
+# define EMPTY 0
+# define SUCCESS 0
+# define FAILURE 1
+
 typedef struct s_map {
-	char	**map;
+	char	**map_char;
 	int		nb_line;
 	char	*no_text;
 	char	*so_text;
 	char	*we_text;
 	char	*ea_text;
-	int		*rgb_ceiling;
-	int		*rgb_floor;
+	int		*rgb_ceiling; // couleurs du plafond
+	int		*rgb_floor; // couleurs du sol
 }				t_map;
 
 typedef struct s_player {
@@ -68,13 +73,13 @@ typedef struct s_ray {
 	int		x; //permet de parcourir tous les rayons
 }				t_ray;
 
-typedef struct s_data {
+typedef struct s_data { // GENERALE DATA
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*mlx_img;
 	int			color;
 	t_img		*img;
-	t_map		*map;
+	t_map		*map; // map copiee
 	t_ray		*ray;
 	t_player	*player;
 }					t_data;
