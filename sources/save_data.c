@@ -1,16 +1,6 @@
 
 #include <../includes/cub3d.h>
 
-int	text_colors_filled(t_data *data)
-{
-	if (!data->map->no_text || !data->map->so_text || !data->map->ea_text
-		|| !data->map->we_text)
-		return (1);
-	if (!data->map->rgb_ceiling[3] || !data->map->rgb_floor[3])
-		return (1);
-	return (0);
-}
-
 int	fill_map(char *str, t_data *data, int i)
 {
 	if (i == 0)
@@ -32,28 +22,21 @@ int	fill_colors(char *str, t_data *data)
 	char	**tmp;
 	int		i;
 
+	str++;
+	while (*str && *str != ' ')
+		str++;
+	tmp = ft_split(str, ',');
+	if (!tmp)
+		return (free_tabs(tmp), 1);
+	i = -1;
 	if (str[0] == 'F')
 	{
-		str++;
-		while (*str && *str != ' ')
-			str++;
-		tmp = ft_split(str, ',');
-		if (!tmp)
-			return (free_tabs(tmp), 1);
-		i = -1;
 		while (++i < 3)
 			data->map->rgb_floor[i] = ft_atoi(tmp[i]);
 		data->map->rgb_floor[3] = 1;
 	}
 	else if (str[0] == 'C')
 	{
-		str++;
-		while (*str && (*str != ' '))
-			str++;
-		tmp = ft_split(str, ',');
-		if (!tmp)
-			return (free_tabs(tmp), 1);
-		i = -1;
 		while (++i < 3)
 			data->map->rgb_ceiling[i] = ft_atoi(tmp[i]);
 		data->map->rgb_ceiling[3] = 1;

@@ -81,3 +81,13 @@ void	print_map(t_data *data)
 		i++;
 	}
 }
+
+int	text_colors_filled(t_data *data)
+{
+	if (!data->map->no_text || !data->map->so_text || !data->map->ea_text
+		|| !data->map->we_text)
+		return (1);
+	if (!data->map->rgb_ceiling[3] || !data->map->rgb_floor[3])
+		return (1);
+	return (0);
+}
