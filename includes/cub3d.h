@@ -46,8 +46,8 @@ typedef struct s_ray {
 	double	pos_y; //position y du joueur
 	double	dir_x; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
 	double	dir_y; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
-	double	plan_x; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double	plan_y; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
+	double	plane_x; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
+	double	plane_y; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
 	double	ray_dir_x; //calcul de direction x du rayon
 	double	ray_dir_y; //calcul de direction y du rayon
 	double	camera_x; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
@@ -66,6 +66,9 @@ typedef struct s_ray {
 	int		draw_start; //position de debut ou il faut dessiner
 	int		draw_end; //position de fin ou il faut dessiner
 	int		x; //permet de parcourir tous les rayons
+	double	time;
+	double	old_time;
+	int		world_map[24][24];
 }				t_ray;
 
 typedef struct s_data {
