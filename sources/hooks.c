@@ -1,12 +1,12 @@
 
 #include <../includes/cub3d.h>
 
-int	handle_keypress(int keysym, t_data *cub)
+int	handle_keypress(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 	{
-		mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
-		cub->win_ptr = NULL;
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		data->win_ptr = NULL;
 	}
 	// if (keysym == XK_Left)
 	// if (keysym == XK_Right)
@@ -15,15 +15,15 @@ int	handle_keypress(int keysym, t_data *cub)
 	return (0);
 }
 
-int	handle_buttonpress(t_data *cub)
+int	handle_buttonpress(t_data *data)
 {
 	// int	i;
 
 	// i = 0;
-	mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
-	cub->win_ptr = NULL;
-	mlx_destroy_image(cub->mlx_ptr, cub->mlx_img);
-	mlx_destroy_display(cub->mlx_ptr);
-	free(cub->mlx_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	data->win_ptr = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->mlx_img);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 	exit (0);
 }

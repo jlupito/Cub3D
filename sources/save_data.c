@@ -21,26 +21,27 @@ int	fill_colors(char *str, t_data *data)
 {
 	char	**tmp;
 	int		i;
+	int		flag;
 
+	flag = 0;
+	if (str[0] == 'F')
+		flag = 1;
 	str++;
-	while (*str && *str != ' ')
-		str++;
 	tmp = ft_split(str, ',');
 	if (!tmp)
 		return (free_tabs(tmp), 1);
 	i = -1;
-	if (str[0] == 'F')
+	while (++i < 3)
 	{
-		while (++i < 3)
+		if (flag)
 			data->map->rgb_floor[i] = ft_atoi(tmp[i]);
-		data->map->rgb_floor[3] = 1;
-	}
-	else if (str[0] == 'C')
-	{
-		while (++i < 3)
+		else
 			data->map->rgb_ceiling[i] = ft_atoi(tmp[i]);
-		data->map->rgb_ceiling[3] = 1;
 	}
+	if (flag)
+		data->map->rgb_floor[3] = 1;
+	else
+		data->map->rgb_ceiling[3] = 1;
 	free_tabs(tmp);
 	return (0);
 }
