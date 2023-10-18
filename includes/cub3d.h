@@ -7,14 +7,15 @@
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <stdbool.h>
 
 # define BLACK_PIX 0x000000
 # define WHITE_PIX 0xFFFFFF
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
-# define WALL 1
-# define EMPTY 0
+# define WALL '1'
+# define EMPTY '0'
 # define SUCCESS 0
 # define FAILURE 1
 
@@ -84,24 +85,36 @@ typedef struct s_data { // GENERALE DATA
 	t_player	*player;
 }					t_data;
 
-/********** HOOKS ***********/
+/************************ HOOKS *************************/
 int		handle_keypress(int keysym, t_data *cub);
 int		handle_buttonpress(t_data *cub);
 
-/********** INIT ***********/
+/************************ INIT *************************/
 int		save_data(char *infile, t_data *data, int flag);
 int		init_data(t_data *data);
 int		check_args(int ac, char **av);
 
-/********** MAP ***********/
+/************************  MAP  *************************/
 int		fill_colors(char *str, t_data *data);
 int		fill_text(char *str, t_data *data);
 int		text_colors_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
 
-/********** UTILS ***********/
+/************************PARSING*************************/
+int	parsing(t_data *data);
+int	count_map_elements(t_data *data);
+int	check_elements_map(t_data *data);
+int	check_closed_map(t_data *data);
+bool empty_line(char *str);
+int	check_empty_line(t_data *data);
+
+/***********************  UTILS  ************************/
 void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	print_map(t_data *data);
+int		len_tab(char **tab);
+
+/*********************** ERRORS ************************/
+void	ft_error(char *message);
 
 #endif
