@@ -8,10 +8,16 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
-# define BLACK_PIX 0x000000
-# define WHITE_PIX 0xFFFFFF
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define YELLOW 0xFFFF00
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+# define ROTSPEED 0.05
+# define MOVESPEED 0.05
 
 typedef struct s_map {
 	char	**map;
@@ -31,6 +37,7 @@ typedef struct s_player {
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	int		flag;
 }				t_player;
 
 typedef struct s_img {
@@ -66,9 +73,10 @@ typedef struct s_ray {
 	int		draw_start; //position de debut ou il faut dessiner
 	int		draw_end; //position de fin ou il faut dessiner
 	int		x; //permet de parcourir tous les rayons
-	double	time;
-	double	old_time;
-	int		world_map[24][24];
+	int		**world_map;
+	double	old_dir_x;
+	double	old_plane_x;
+	// int		world_map[24][24];
 }				t_ray;
 
 typedef struct s_data {
@@ -83,8 +91,8 @@ typedef struct s_data {
 }					t_data;
 
 /********** HOOKS ***********/
-int		handle_keypress(int keysym, t_data *cub);
-int		handle_buttonpress(t_data *cub);
+int		handle_keypress(int keysym, t_data *data);
+int		handle_buttonpress(t_data *data);
 
 /********** INIT ***********/
 int		save_data(char *infile, t_data *data, int flag);
@@ -101,5 +109,10 @@ int		fill_map(char *str, t_data *data, int i);
 void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	print_map(t_data *data);
+
+/********** DRAW ***********/
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	draw_line(t_ray *ray, t_data *data, int x, int color);
+int		get_color(t_data *data);
 
 #endif

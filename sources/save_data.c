@@ -12,6 +12,8 @@ int	fill_map(char *str, t_data *data, int i)
 	data->map->map[i] = ft_strdup(str);
 	if (!data->map->map[i])
 		return (1);
+	if (search_player_pos(data->map->map[i], i, data))
+		return (1);
 	if (i == (data->map->nb_line - 1))
 		data->map->map[i + 1] = NULL;
 	return (0);
