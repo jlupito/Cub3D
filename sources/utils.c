@@ -6,7 +6,7 @@ int	init_data(t_data *data)
 	data->map = malloc(sizeof(t_map) * 1);
 	if (!data->map)
 		return (1);
-	data->map->map = NULL;
+	data->map->map_char = NULL;
 	data->map->no_text = NULL;
 	data->map->so_text = NULL;
 	data->map->we_text = NULL;
@@ -52,8 +52,8 @@ void	free_all(t_data *data)
 		free(data->map->rgb_ceiling);
 	if (data->map->rgb_floor[3])
 		free(data->map->rgb_floor);
-	if (data->map->map)
-		free_tabs(data->map->map);
+	if (data->map->map_char)
+		free_tabs(data->map->map_char);
 	if (data->map)
 		free(data->map);
 	if (data)
@@ -75,9 +75,9 @@ void	print_map(t_data *data)
 	while (++i < 3)
 		printf("rgb_floor: %d\n", data->map->rgb_floor[i]);
 	i = 0;
-	while (data->map->map[i])
+	while (data->map->map_char[i])
 	{
-		printf("map: %s\n", data->map->map[i]);
+		printf("map: %s\n", data->map->map_char[i]);
 		i++;
 	}
 }
@@ -90,4 +90,14 @@ int	text_colors_filled(t_data *data)
 	if (!data->map->rgb_ceiling[3] || !data->map->rgb_floor[3])
 		return (1);
 	return (0);
+}
+
+int	len_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

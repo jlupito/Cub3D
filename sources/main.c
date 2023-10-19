@@ -78,7 +78,7 @@ int	main(int ac, char **av)
 		return (free_all(data), EXIT_FAILURE);
 	if (save_data(av[1], data, 1))
 		return (free_all(data), EXIT_FAILURE);
-	if (parsing())
+	if (parsing(data))
 		return (free_all(data), EXIT_FAILURE);
 	// start_game(data);
 	print_map(data);

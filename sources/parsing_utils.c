@@ -28,7 +28,7 @@ int	check_empty_line(t_data *data) // OK
 	return (SUCCESS);
 }
 
-int	check_(char c)
+int	is_nothing(char c)
 {
 	if (!c)
 		return (1);
@@ -37,12 +37,24 @@ int	check_(char c)
 	return (1);
 }
 
-int	len_tab(char **tab)
+bool	test_path_texture(char *code_texture) // OK mais verifier les index
 {
+	char	*path;
 	int	i;
 
-	i = 0;
-	while (tab[i])
+	i = 4; // attention debut a l'index 0
+	if (!code_texture || !code_texture[i])
+		return (NULL);
+	while (code_texture[i])
 		i++;
-	return (i);
+	path = malloc(sizeof(*path) * i + 1);
+	if (!path)
+		return (false);
+	if (!access(path, F_OK))
+	{
+		free(path);
+		return (false);
+	}
+	else
+		return (true);
 }
