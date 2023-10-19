@@ -67,10 +67,10 @@ typedef struct s_ray {
 	int		line_height; //hauteur de la ligne a dessiner
 	int		draw_start; //position de debut ou il faut dessiner
 	int		draw_end; //position de fin ou il faut dessiner
-	// int		x; //permet de parcourir tous les rayons
 	char	**world_map;
 	double	old_dir_x;
 	double	old_plane_x;
+	// int		x; //permet de parcourir tous les rayons
 	// int		world_map[24][24];
 }				t_ray;
 
@@ -101,6 +101,7 @@ int		handle_buttonpress(t_data *data);
 int		save_data(char *infile, t_data *data, int flag);
 int		init_data(t_data *data);
 int		check_args(int ac, char **av);
+void	init_ray_cast(t_ray *ray);
 
 /********** MAP ***********/
 int		fill_colors(char *str, t_data *data);
@@ -117,12 +118,13 @@ void	print_map(t_data *data);
 /********** DRAW ***********/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line(t_ray *ray, t_data *data, int x, int color);
-int		get_color(t_data *data);
+int		get_color(t_ray ray);
 
 /********** RAY_CAST ***********/
-void	ray_throw(t_ray *ray, int x);
-void	step_side_dist(t_ray *ray);
-void	prep_drawing(t_ray *ray);
-void	perform_dda(t_ray *ray);
+void	ray_throw(t_ray ray, int x);
+void	step_side_dist(t_ray ray);
+void	prep_drawing(t_ray ray);
+void	perform_dda(t_ray ray);
+void	init_ray_cast(t_ray *ray);
 
 #endif

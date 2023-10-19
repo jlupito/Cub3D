@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:44:50 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/10/16 16:44:49 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:36:32 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_list
 }					t_list;
 
 // LIBFT Functions
-int				ft_atoi(const char *nptr);
+int				ft_atoi(char *nptr);
 void			ft_bzero(void *s, size_t n);
 void			*ft_calloc(size_t nmemb, size_t size);
 int				ft_isalnum(int c);

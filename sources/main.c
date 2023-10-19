@@ -28,30 +28,28 @@ void	draw_line(t_ray *ray, t_data *data, int x, int color)
 int	render(t_data *data)
 {	
 	int	x;
-	int	color;
 
 	x = 0;
 	printf("tu arrives ici?\n");
-	if (data->win_ptr == NULL)
-		return (-1);
-	printf("tu arrives ici 2?\n");
 	while (x < WIN_WIDTH)
 	{
 		printf("tu rentres dans la boucle?\n");
-		ray_throw(data->ray, x);
-		step_side_dist(data->ray);
-		perform_dda(data->ray);
-		prep_drawing(data->ray);
-		color = get_color(data);
-		draw_line(data->ray, data, x, color);
+		ray_throw(*data->ray, x);
+		step_side_dist(*data->ray);
+		perform_dda(*data->ray);
+		prep_drawing(*data->ray);
+		draw_line(data->ray, data, x, get_color(*data->ray));
 		x++;
 	}
-	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
 	return (0);
 }
 
 int	start_game(t_data *data)
 {
+	int i = 0;
+	int j = 0;
+	
 	data->ray->world_map[0] = ft_strdup("111111111111111111111111");
 	data->ray->world_map[1] = ft_strdup("100000000000000000000001");
 	data->ray->world_map[2] = ft_strdup("100000000000000000000001");
@@ -68,12 +66,17 @@ int	start_game(t_data *data)
 	data->ray->world_map[13] = ft_strdup("111111111111111111111111");
 	data->ray->world_map[14] = NULL;
 
+	while (i < 14)
+	{
+		while (j < 24)
+			printf("x++: %s", data->ray->world_map[i][j++]);
+		i++;
+	}
+	
 	data->ray->pos_x = 14;
 	data->ray->pos_y = 8;  //x and y start position
 	data->ray->dir_x = -1;
 	data->ray->dir_y = 0; //initial direction vector
-  	data->ray->plane_x = 0;
-	data->ray->plane_y = 0.66; //the 2d raycaster version of camera plane
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (EXIT_FAILURE);

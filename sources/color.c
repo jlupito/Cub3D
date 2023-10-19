@@ -1,12 +1,13 @@
 
 #include <../includes/cub3d.h>
 
-int	get_color(t_data *data)
+int	get_color(t_ray ray)
 {
-	int	position;
-	int	color;
+	int		position;
+	int		color;
 
-	position = data->ray->world_map[data->ray->map_x][data->ray->map_y];
+	printf("pos: %d\n", ray.world_map[ray.map_y][ray.map_x]);
+	position = ray.world_map[ray.map_y][ray.map_x];
 	if (position == 1)
 		color = RED;
 	else if (position == 2)
@@ -17,7 +18,7 @@ int	get_color(t_data *data)
 		color = WHITE;
 	else
 		color = YELLOW;
-	if (data->ray->side == 1)
+	if (ray.side == 1)
 		color = color / 2;
 	return (color);
 }

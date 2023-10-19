@@ -25,6 +25,7 @@ int	init_data(t_data *data)
 	data->ray = malloc(sizeof(t_ray) * 1);
 	if (!data->ray)
 		return (1);
+	init_ray_cast(data->ray);
 	data->ray->world_map = malloc(sizeof(char *) * 15);
 	while (i < 14)
 	{
@@ -69,6 +70,12 @@ void	free_all(t_data *data)
 		free_tabs(data->map->map_char);
 	if (data->map)
 		free(data->map);
+	if (data->ray->world_map)
+		free_tabs(data->ray->world_map);
+	if (data->ray)
+		free(data->ray);
+	if (data->img)
+		free(data->img);
 	if (data)
 		free(data);
 }
