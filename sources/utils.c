@@ -25,7 +25,7 @@ int	init_data(t_data *data)
 	data->ray = malloc(sizeof(t_ray) * 1);
 	if (!data->ray)
 		return (1);
-	init_ray_cast(data->ray);
+	init_ray_cast(data);
 	data->ray->world_map = malloc(sizeof(char *) * 15);
 	while (i < 14)
 	{

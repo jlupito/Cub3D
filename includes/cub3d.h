@@ -101,7 +101,6 @@ int		handle_buttonpress(t_data *data);
 int		save_data(char *infile, t_data *data, int flag);
 int		init_data(t_data *data);
 int		check_args(int ac, char **av);
-void	init_ray_cast(t_ray *ray);
 
 /********** MAP ***********/
 int		fill_colors(char *str, t_data *data);
@@ -118,13 +117,14 @@ void	print_map(t_data *data);
 /********** DRAW ***********/
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line(t_ray *ray, t_data *data, int x, int color);
-int		get_color(t_ray ray);
+int		get_color(t_ray *ray);
 
 /********** RAY_CAST ***********/
-void	ray_throw(t_ray ray, int x);
-void	step_side_dist(t_ray ray);
-void	prep_drawing(t_ray ray);
-void	perform_dda(t_ray ray);
-void	init_ray_cast(t_ray *ray);
+void	ray_throw(t_data *data, int x);
+void	step_side_dist(t_data *data);
+void	prep_drawing(t_data *data);
+void	perform_dda(t_data *data);
+void	init_ray_cast(t_data *data);
+int		game_loop(t_data *data);
 
 #endif
