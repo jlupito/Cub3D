@@ -7,6 +7,8 @@
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <stdbool.h>
+# include <limits.h>
 
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
@@ -20,7 +22,7 @@
 # define MOVESPEED 0.05
 
 typedef struct s_map {
-	char	**map;
+	char	**map_char;
 	int		nb_line;
 	char	*no_text;
 	char	*so_text;
@@ -40,13 +42,6 @@ typedef struct s_player {
 	int		flag;
 }				t_player;
 
-typedef struct s_img {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}				t_img;
 
 typedef struct s_ray {
 	double	pos_x; //position x du joueur
@@ -72,18 +67,26 @@ typedef struct s_ray {
 	int		line_height; //hauteur de la ligne a dessiner
 	int		draw_start; //position de debut ou il faut dessiner
 	int		draw_end; //position de fin ou il faut dessiner
-	int		x; //permet de parcourir tous les rayons
-	int		**world_map;
+	// int		x; //permet de parcourir tous les rayons
+	char	**world_map;
 	double	old_dir_x;
 	double	old_plane_x;
 	// int		world_map[24][24];
 }				t_ray;
 
+typedef struct s_img {
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}				t_img;
+
 typedef struct s_data {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*mlx_img;
-	int			color;
+	// void		*mlx_img;
+	// int			color;
 	t_img		*img;
 	t_map		*map;
 	t_ray		*ray;
@@ -104,6 +107,7 @@ int		fill_colors(char *str, t_data *data);
 int		fill_text(char *str, t_data *data);
 int		text_colors_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
+// int		search_player_pos(char *str, int y, t_data *data);
 
 /********** UTILS ***********/
 void	free_tabs(char **tab);
@@ -114,5 +118,11 @@ void	print_map(t_data *data);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	draw_line(t_ray *ray, t_data *data, int x, int color);
 int		get_color(t_data *data);
+
+/********** RAY_CAST ***********/
+void	ray_throw(t_ray *ray, int x);
+void	step_side_dist(t_ray *ray);
+void	prep_drawing(t_ray *ray);
+void	perform_dda(t_ray *ray);
 
 #endif

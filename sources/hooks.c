@@ -28,20 +28,20 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	if (keysym == XK_Up)
 	{
-		if (data->ray->world_map[int(data->ray->pos_x + data->ray->dir_x
-				* MOVESPEED)][int(data->ray->pos_y)] == false) 
+		if (data->ray->world_map[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
+				+ data->ray->dir_x * MOVESPEED)] == false)
 			data->ray->pos_x += data->ray->dir_x * MOVESPEED;
-		if (data->ray->world_map[int(data->ray->pos_x)][int(data->ray->pos_y
-				+ data->ray->dir_y * MOVESPEED)] == false)
+		if (data->ray->world_map[(int)(data->ray->pos_y + data->ray->dir_y
+				* MOVESPEED)][(int)(data->ray->pos_x)] == false)
 			data->ray->pos_y += data->ray->dir_y * MOVESPEED;
 	}
 	if (keysym == XK_Down)
 	{
-		if (data->ray->world_map[int(data->ray->pos_x - data->ray->dir_x
-				* MOVESPEED)][int(data->ray->pos_y)] == false) 
+		if (data->ray->world_map[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
+				- data->ray->dir_x * MOVESPEED)] == false)
 			data->ray->pos_x -= data->ray->dir_x * MOVESPEED;
-		if (data->ray->world_map[int(data->ray->pos_x)][int(data->ray->pos_y
-				+ data->ray->dir_y * MOVESPEED)] == false)
+		if (data->ray->world_map[(int)(data->ray->pos_y + data->ray->dir_y
+				* MOVESPEED)][(int)(data->ray->pos_x)] == false)
 			data->ray->pos_y -= data->ray->dir_y * MOVESPEED;
 	}
 	return (0);
@@ -54,7 +54,7 @@ int	handle_buttonpress(t_data *data)
 	// i = 0;
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	data->win_ptr = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	exit (0);

@@ -5,17 +5,17 @@ int	fill_map(char *str, t_data *data, int i)
 {
 	if (i == 0)
 	{
-		data->map->map = malloc(sizeof(char *) * (data->map->nb_line + 1));
-		if (!data->map->map)
+		data->map->map_char = malloc(sizeof(char *) * (data->map->nb_line + 1));
+		if (!data->map->map_char)
 			return (1);
 	}
-	data->map->map[i] = ft_strdup(str);
-	if (!data->map->map[i])
+	data->map->map_char[i] = ft_strdup(str);
+	if (!data->map->map_char[i])
 		return (1);
-	if (search_player_pos(data->map->map[i], i, data))
-		return (1);
+	// if (search_player_pos(data->map->map_char[i], i, data))
+	// 	return (1);
 	if (i == (data->map->nb_line - 1))
-		data->map->map[i + 1] = NULL;
+		data->map->map_char[i + 1] = NULL;
 	return (0);
 }
 
