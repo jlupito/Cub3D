@@ -36,21 +36,21 @@ int	game_loop(t_data *data)
 
 int	start_game(t_data *data)
 {
-	data->ray->world_map[0] = ft_strdup("111111111111111111111111");
-	data->ray->world_map[1] = ft_strdup("100000000000000000000001");
-	data->ray->world_map[2] = ft_strdup("100000000000000000000001");
-	data->ray->world_map[3] = ft_strdup("100000222220000303030001");
-	data->ray->world_map[4] = ft_strdup("100000200020000000000001");
-	data->ray->world_map[5] = ft_strdup("100000200020000300030001");
-	data->ray->world_map[6] = ft_strdup("100000220220000303030001");
-	data->ray->world_map[7] = ft_strdup("100000000000000000000001");
-	data->ray->world_map[8] = ft_strdup("144444444000000000000001");
-	data->ray->world_map[9] = ft_strdup("140400004000000000000001");
-	data->ray->world_map[10] = ft_strdup("140000504000000000000001");
-	data->ray->world_map[11] = ft_strdup("140444444000000000000001");
-	data->ray->world_map[12] = ft_strdup("140000000000000000000001");
-	data->ray->world_map[13] = ft_strdup("111111111111111111111111");
-	data->ray->world_map[14] = NULL;
+	// data->ray->world_map[0] = ft_strdup("111111111111111111111111");
+	// data->ray->world_map[1] = ft_strdup("100000000000000000000001");
+	// data->ray->world_map[2] = ft_strdup("100000000000000000000001");
+	// data->ray->world_map[3] = ft_strdup("100000222220000303030001");
+	// data->ray->world_map[4] = ft_strdup("100000200020000000000001");
+	// data->ray->world_map[5] = ft_strdup("100000200020000300030001");
+	// data->ray->world_map[6] = ft_strdup("100000220220000303030001");
+	// data->ray->world_map[7] = ft_strdup("100000000000000000000001");
+	// data->ray->world_map[8] = ft_strdup("144444444000000000000001");
+	// data->ray->world_map[9] = ft_strdup("140400004000000000000001");
+	// data->ray->world_map[10] = ft_strdup("140000504000000000000001");
+	// data->ray->world_map[11] = ft_strdup("140444444000000000000001");
+	// data->ray->world_map[12] = ft_strdup("140000000000000000000001");
+	// data->ray->world_map[13] = ft_strdup("111111111111111111111111");
+	// data->ray->world_map[14] = NULL;
 	
 	data->ray->pos_x = 14;
 	data->ray->pos_y = 8;  //x and y start position

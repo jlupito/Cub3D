@@ -4,7 +4,6 @@ int	init_data(t_data *data)
 {
 	int	i;
 
-	i = 0;
 	data->map = malloc(sizeof(t_map) * 1);
 	if (!data->map)
 		return (1);
@@ -25,10 +24,10 @@ int	init_data(t_data *data)
 	if (!data->ray)
 		return (1);
 	init_ray_cast(data->ray);
-	data->ray->world_map = malloc(sizeof(char *) * 15);
-	while (i < 14)
+	i = 0;
+	while (i < 5)
 	{
-		data->ray->world_map[i] = malloc(sizeof(char) * 25);
+		data->img[i].path = NULL;
 		i++;
 	}
 	return (0);

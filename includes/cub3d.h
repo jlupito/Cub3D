@@ -87,12 +87,12 @@ typedef struct s_ray {
 typedef struct s_img {
 	void	*img_ptr;
 	char	*addr;
+	char	*path;
 	int		bpp;
 	int		line_len;
 	int		endian;
 	int		height;
 	int		width;
-	char	*path;
 }				t_img;
 
 typedef struct s_data {
