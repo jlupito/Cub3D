@@ -18,6 +18,8 @@
 # define YELLOW 0xFFFF00
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # define ROTSPEED 0.05
 # define MOVESPEED 0.05
 
@@ -41,7 +43,6 @@ typedef struct s_player {
 	double	plane_y;
 	int		flag;
 }				t_player;
-
 
 typedef struct s_ray {
 	double	pos_x; //position x du joueur
@@ -70,8 +71,17 @@ typedef struct s_ray {
 	char	**world_map;
 	double	old_dir_x;
 	double	old_plane_x;
-	// int		x; //permet de parcourir tous les rayons
-	// int		world_map[24][24];
+	double	ta_mere;
+	int		tex_img;
+	int		tex_height;
+	double	tex_incr_y;
+	double	step_tex;
+	double	tex_pos;
+	int		tex_num;
+	double	tex_width;
+	int		tex_x;
+	int		tex_y;
+	double	wall_x;
 }				t_ray;
 
 typedef struct s_img {
@@ -80,14 +90,15 @@ typedef struct s_img {
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		height;
+	int		width;
+	char	*path;
 }				t_img;
 
 typedef struct s_data {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	// void		*mlx_img;
-	// int			color;
-	t_img		*img;
+	t_img		img[5];
 	t_map		*map;
 	t_ray		*ray;
 	t_player	*player;
@@ -115,16 +126,17 @@ void	free_all(t_data *data);
 void	print_map(t_data *data);
 
 /********** DRAW ***********/
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	draw_line(t_ray *ray, t_data *data, int x, int color);
-int		get_color(t_ray *ray);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	draw_verti(t_data *data, int x);
+int		get_color(t_data *data, int x, int y, int i);
+int		render(t_data *data);
 
 /********** RAY_CAST ***********/
 void	ray_throw(t_data *data, int x);
 void	step_side_dist(t_data *data);
 void	prep_drawing(t_data *data);
 void	perform_dda(t_data *data);
-void	init_ray_cast(t_data *data);
+void	init_ray_cast(t_ray *ray);
 int		game_loop(t_data *data);
 
 #endif

@@ -1,72 +1,34 @@
 
 #include <../includes/cub3d.h>
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-
-	if (y < 0 || y > WIN_HEIGHT - 1 || x < 0 || x > WIN_WIDTH - 1)
-		return ;
-	pixel = (img->addr + (y * img->line_len + x * \
-		(img->bpp / 8)));
-	*(unsigned int *)pixel = color;
-}
-
-void	draw_line(t_ray *ray, t_data *data, int x, int color)
-{
-	int	y;
-
-	y = 0;
-	while (y < ray->draw_start)
-		my_mlx_pixel_put(data->img, x, y++, color);
-	while (y < ray->draw_end)
-		my_mlx_pixel_put(data->img, x, y++, color);
-	while (y < WIN_HEIGHT)
-		my_mlx_pixel_put(data->img, x, y++, color);
-}
-
-int	render(t_data *data)
-{	
-	int	x;
-
-	x = 0;
-	printf("tu arrives ici?\n");
-	printf("cam x apres: %f\n", data->ray->camera_x);
-	printf("pos x apres: %f\n", data->ray->pos_x);
-	while (x < WIN_WIDTH)
-	{
-		ray_throw(data, x);
-		step_side_dist(data);
-		perform_dda(data);
-		prep_drawing(data);
-		draw_line(data->ray, data, x, get_color(data->ray));
-		x++;
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0, 0);
-	return (0);
-}
-
 int	game_loop(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (EXIT_FAILURE);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!data->win_ptr)
 		return (free(data->win_ptr), EXIT_FAILURE);
-	data->img = malloc(sizeof(t_img));
-	if (!data->img)
-		return (1);
-	data->img->img_ptr = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	data->img->addr = mlx_get_data_addr(data->img->img_ptr, &data->img->bpp,
-			&data->img->line_len, &data->img->endian);
+	while (i < 5)
+	{
+		if (i == 0)
+			data->img[i].img_ptr = mlx_new_image(data->mlx_ptr,
+					WIN_WIDTH, WIN_HEIGHT);
+		else
+			data->img[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+				data->img[i].path, &data->img[i].width, &data->img[i].height);
+		data->img[i].addr = mlx_get_data_addr(data->img[i].img_ptr,
+			&data->img[i].bpp, &data->img[i].line_len, &data->img[i].endian);
+		i++;
+	}
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, &data);
 	mlx_hook(data->win_ptr, 17, 0, handle_buttonpress, &data);
-	printf("cam x avant: %f\n", data->ray->camera_x);
-	printf("pos x avant: %f\n", data->ray->pos_x);
-	mlx_loop_hook(data->mlx_ptr, &render, &data);
+	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img[0].img_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	return (0);
@@ -94,29 +56,27 @@ int	start_game(t_data *data)
 	data->ray->pos_y = 8;  //x and y start position
 	data->ray->dir_x = -1;
 	data->ray->dir_y = 0; //initial direction vector
+
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
+	t_data	data;
 
 	(void)ac;
 	(void)av;
 	// if (check_args(ac, av))
 	// 	return (EXIT_FAILURE);
-	data = malloc(sizeof(t_data) * 1);
-	if (!data)
-		return (EXIT_FAILURE);
-	if (init_data(data))
-		return (free_all(data), EXIT_FAILURE);
-	// if (save_data(av[1], data, 0))
-	// 	return (free_all(data), EXIT_FAILURE);
+	if (init_data(&data))
+		return (free_all(&data), EXIT_FAILURE);
+	if (save_data(av[1], &data, 0))
+		return (free_all(&data), EXIT_FAILURE);
 	// if (save_data(av[1], data, 1))
 	// 	return (free_all(data), EXIT_FAILURE);
-	start_game(data);
-	game_loop(data);
+	start_game(&data);
+	game_loop(&data);
 	// print_map(data);
-	free_all(data);
+	free_all(&data);
 	return (0);
 }
