@@ -5,17 +5,17 @@ int	fill_map(char *str, t_data *data, int i)
 {
 	if (i == 0)
 	{
-		data->map->map_char = malloc(sizeof(char *) * (data->map->nb_line + 1));
-		if (!data->map->map_char)
+		data->map_char = malloc(sizeof(char *) * (data->nb_line + 1));
+		if (!data->map_char)
 			return (1);
 	}
-	data->map->map_char[i] = ft_strdup(str);
-	if (!data->map->map_char[i])
+	data->map_char[i] = ft_strdup(str);
+	if (!data->map_char[i])
 		return (1);
-	// if (search_player_pos(data->map->map_char[i], i, data))
-	// 	return (1);
-	if (i == (data->map->nb_line - 1))
-		data->map->map_char[i + 1] = NULL;
+	if (search_player_pos(data->map_char[i], i, data))
+		return (1);
+	if (i == (data->nb_line - 1))
+		data->map_char[i + 1] = NULL;
 	return (0);
 }
 
@@ -36,14 +36,14 @@ int	fill_colors(char *str, t_data *data)
 	while (++i < 3)
 	{
 		if (flag)
-			data->map->rgb_floor[i] = ft_atoi(tmp[i]);
+			data->rgb_floor[i] = ft_atoi(tmp[i]);
 		else
-			data->map->rgb_ceiling[i] = ft_atoi(tmp[i]);
+			data->rgb_ceiling[i] = ft_atoi(tmp[i]);
 	}
 	if (flag)
-		data->map->rgb_floor[3] = 1;
+		data->rgb_floor[3] = 1;
 	else
-		data->map->rgb_ceiling[3] = 1;
+		data->rgb_ceiling[3] = 1;
 	free_tabs(tmp);
 	return (0);
 }
@@ -54,25 +54,25 @@ int	fill_text(char *str, t_data *data)
 	{
 		while (*str && *str != '.')
 			str++;
-		data->map->no_text = ft_strdup(str);
+		data->img[1].path = ft_strdup_trim(str);
 	}
 	else if (!ft_strncmp(str, "SO", 2))
 	{
 		while (*str && *str != '.')
 			str++;
-		data->map->so_text = ft_strdup(str);
+		data->img[2].path = ft_strdup_trim(str);
 	}
 	else if (!ft_strncmp(str, "WE", 2))
 	{
 		while (*str && *str != '.')
 			str++;
-		data->map->we_text = ft_strdup(str);
+		data->img[3].path = ft_strdup_trim(str);
 	}
 	else if (!ft_strncmp(str, "EA", 2))
 	{
 		while (*str && *str != '.')
 			str++;
-		data->map->ea_text = ft_strdup(str);
+		data->img[4].path = ft_strdup_trim(str);
 	}
 	return (0);
 }
@@ -120,7 +120,7 @@ int	save_data(char *infile, t_data *data, int flag)
 		line = get_next_line(fd);
 	}
 	if (!flag)
-		data->map->nb_line = i;
+		data->nb_line = i;
 	(free(line), close(fd));
 	return (0);
 }

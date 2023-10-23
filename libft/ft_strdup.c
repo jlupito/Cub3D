@@ -31,3 +31,23 @@ char	*ft_strdup(const char *s)
 	dst[i] = '\0';
 	return (dst);
 }
+
+char	*ft_strdup_trim(const char *s)
+{
+	char	*dst;
+	int		i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	dst = malloc(sizeof(char) * (ft_strlen(s)));
+	if (!dst)
+		return (NULL);
+	while (s[i] != '\n')
+	{
+		dst[i] = s[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}

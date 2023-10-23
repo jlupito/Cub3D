@@ -4,33 +4,26 @@ int	init_data(t_data *data)
 {
 	int	i;
 
-	data->map = malloc(sizeof(t_map) * 1);
-	if (!data->map)
-		return (1);
-	data->map->map_char = NULL;
-	data->map->no_text = NULL;
-	data->map->so_text = NULL;
-	data->map->we_text = NULL;
-	data->map->ea_text = NULL;
-	data->map->nb_line = 0;
-	// data->player->flag = 0;
-	data->map->rgb_ceiling = ft_calloc(4, sizeof(int));
-	if (!data->map->rgb_ceiling)
-		return (1);
-	data->map->rgb_floor = ft_calloc(4, sizeof(int));
-	if (!data->map->rgb_floor)
-		return (1);
+	data->nb_line = 0;
+	data->player = 0;
+	data->rgb_ceiling = ft_calloc(4, sizeof(int));
+	if (!data->rgb_ceiling)
+		return (EXIT_FAILURE);
+	data->rgb_floor = ft_calloc(4, sizeof(int));
+	if (!data->rgb_floor)
+		return (EXIT_FAILURE);
 	data->ray = malloc(sizeof(t_ray) * 1);
 	if (!data->ray)
-		return (1);
+		return (EXIT_FAILURE);
 	init_ray_cast(data->ray);
 	i = 0;
 	while (i < 5)
 	{
 		data->img[i].path = NULL;
+		data->img[i].addr = NULL;
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 void	init_ray_cast(t_ray *ray)

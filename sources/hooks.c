@@ -28,19 +28,19 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	if (keysym == XK_Up)
 	{
-		if (data->ray->world_map[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
+		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				+ data->ray->dir_x * MOVESPEED)] == false)
 			data->ray->pos_x += data->ray->dir_x * MOVESPEED;
-		if (data->ray->world_map[(int)(data->ray->pos_y + data->ray->dir_y
+		if (data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
 				* MOVESPEED)][(int)(data->ray->pos_x)] == false)
 			data->ray->pos_y += data->ray->dir_y * MOVESPEED;
 	}
 	if (keysym == XK_Down)
 	{
-		if (data->ray->world_map[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
+		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				- data->ray->dir_x * MOVESPEED)] == false)
 			data->ray->pos_x -= data->ray->dir_x * MOVESPEED;
-		if (data->ray->world_map[(int)(data->ray->pos_y + data->ray->dir_y
+		if (data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
 				* MOVESPEED)][(int)(data->ray->pos_x)] == false)
 			data->ray->pos_y -= data->ray->dir_y * MOVESPEED;
 	}

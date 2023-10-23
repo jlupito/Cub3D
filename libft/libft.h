@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:44:50 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/10/19 16:36:32 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:26:40 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void			*ft_memset(void *s, int c, size_t n);
 char			*ft_strchr(char *s, int c);
 char			*ft_strdup(const char *s);
 char			*ft_strdup2(const char *s);
+char			*ft_strdup_trim(const char *s);
 char			*ft_strcat(char *dst, const char *src);
 char			*ft_strcpy(char *dst, const char *src);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);

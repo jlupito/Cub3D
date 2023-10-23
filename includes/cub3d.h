@@ -23,17 +23,6 @@
 # define ROTSPEED 0.05
 # define MOVESPEED 0.05
 
-typedef struct s_map {
-	char	**map_char;
-	int		nb_line;
-	char	*no_text;
-	char	*so_text;
-	char	*we_text;
-	char	*ea_text;
-	int		*rgb_ceiling;
-	int		*rgb_floor;
-}				t_map;
-
 typedef struct s_player {
 	double	pos_x;
 	double	pos_y;
@@ -99,9 +88,15 @@ typedef struct s_data {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img[5];
-	t_map		*map;
 	t_ray		*ray;
-	t_player	*player;
+	int			player;
+	char		**map_char;
+	int			nb_line;
+	int			*rgb_ceiling;
+	int			*rgb_floor;
+	int			col_ceiling;
+	int			col_floor;
+	// t_player	*player;
 }					t_data;
 
 /********** HOOKS ***********/
@@ -112,6 +107,8 @@ int		handle_buttonpress(t_data *data);
 int		save_data(char *infile, t_data *data, int flag);
 int		init_data(t_data *data);
 int		check_args(int ac, char **av);
+int		search_player_pos(char *str, int y, t_data *data);
+
 
 /********** MAP ***********/
 int		fill_colors(char *str, t_data *data);
@@ -128,7 +125,8 @@ void	print_map(t_data *data);
 /********** DRAW ***********/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_verti(t_data *data, int x);
-int		get_color(t_data *data, int x, int y, int i);
+int		get_tex_color(t_data *data, int x, int y, int i);
+int		get_int_color(int rgb[3]);
 int		render(t_data *data);
 
 /********** RAY_CAST ***********/
@@ -137,6 +135,7 @@ void	step_side_dist(t_data *data);
 void	prep_drawing(t_data *data);
 void	perform_dda(t_data *data);
 void	init_ray_cast(t_ray *ray);
+int		game_init(t_data *data);
 int		game_loop(t_data *data);
 
 #endif

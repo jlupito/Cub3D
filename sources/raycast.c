@@ -65,7 +65,7 @@ void	perform_dda(t_data *data)
 			data->ray->map_y += data->ray->step_y;
 			data->ray->side = 1;
 		}
-		if (data->ray->world_map[data->ray->map_y][data->ray->map_x] > 0)
+		if (data->map_char[data->ray->map_y][data->ray->map_x] > 0)
 			data->ray->hit = 1;
 	}
 	if (data->ray->side == 0)
@@ -85,6 +85,16 @@ void	prep_drawing(t_data *data)
 	data->ray->draw_end = data->ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (data->ray->draw_end >= WIN_HEIGHT)
 		data->ray->draw_end = WIN_HEIGHT - 1;
+
+	if (data->ray->side == 0 && data->ray->ray_dir_x < 0)
+		data->ray->tex_img = 1;
+	else if (data->ray->side == 0 && data->ray->ray_dir_x > 0)
+		data->ray->tex_img = 2;
+	else if (data->ray->side == 1 && data->ray->ray_dir_y < 0)
+		data->ray->tex_img = 3;
+	else if (data->ray->side == 1 && data->ray->ray_dir_y > 0)
+		data->ray->tex_img = 4;
+
 	if (data->ray->side == 0)
 		data->ray->wall_x = data->ray->pos_y + data->ray->perp_wall_dist
 			* data->ray->dir_y;
