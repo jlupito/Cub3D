@@ -23,21 +23,11 @@
 # define ROTSPEED 0.05
 # define MOVESPEED 0.05
 
-typedef struct s_player {
+typedef struct s_ray {
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	int		flag;
-}				t_player;
-
-typedef struct s_ray {
-	double	pos_x; //position x du joueur
-	double	pos_y; //position y du joueur
-	double	dir_x; //vecteur de direction (commence à -1 pour N, 1 pour S, 0 sinon)
-	double	dir_y; //vecteur de direction (commence à -1 pour W, 1 pour E, 0 sinon)
 	double	plane_x; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
 	double	plane_y; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
 	double	ray_dir_x; //calcul de direction x du rayon
@@ -57,17 +47,11 @@ typedef struct s_ray {
 	int		line_height; //hauteur de la ligne a dessiner
 	int		draw_start; //position de debut ou il faut dessiner
 	int		draw_end; //position de fin ou il faut dessiner
-	char	**world_map;
 	double	old_dir_x;
 	double	old_plane_x;
-	double	ta_mere;
 	int		tex_img;
-	int		tex_height;
-	double	tex_incr_y;
 	double	step_tex;
 	double	tex_pos;
-	int		tex_num;
-	double	tex_width;
 	int		tex_x;
 	int		tex_y;
 	double	wall_x;
@@ -94,9 +78,6 @@ typedef struct s_data {
 	int			nb_line;
 	int			*rgb_ceiling;
 	int			*rgb_floor;
-	int			col_ceiling;
-	int			col_floor;
-	// t_player	*player;
 }					t_data;
 
 /********** HOOKS ***********/
@@ -106,9 +87,9 @@ int		handle_buttonpress(t_data *data);
 /********** INIT ***********/
 int		save_data(char *infile, t_data *data, int flag);
 int		init_data(t_data *data);
+int		init_player_pos(char *str, int y, t_data *data);
+void	init_ray_cast(t_ray *ray);
 int		check_args(int ac, char **av);
-int		search_player_pos(char *str, int y, t_data *data);
-
 
 /********** MAP ***********/
 int		fill_colors(char *str, t_data *data);
@@ -134,7 +115,7 @@ void	ray_throw(t_data *data, int x);
 void	step_side_dist(t_data *data);
 void	prep_drawing(t_data *data);
 void	perform_dda(t_data *data);
-void	init_ray_cast(t_ray *ray);
+void	calc_texture(t_data *data);
 int		game_init(t_data *data);
 int		game_loop(t_data *data);
 

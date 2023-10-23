@@ -16,17 +16,18 @@ void	draw_verti(t_data *data, int x)
 	int	y;
 
 	y = 0;
+	calc_texture(data);
 	while (y < data->ray->draw_start)
-		my_mlx_pixel_put(data, x, y++, get_int_color(data->rgb_floor));
+		my_mlx_pixel_put(data, x, y++, get_int_color(data->rgb_ceiling));
 	while (y < data->ray->draw_end)
 	{
 		my_mlx_pixel_put(data, x, y, get_tex_color(data, data->ray->tex_x,
 				(int)data->ray->tex_pos, data->ray->tex_img));
-		data->ray->tex_pos += data->ray->tex_incr_y;
+		data->ray->tex_pos += data->ray->step_tex;
 		y++;
 	}
 	while (y < WIN_HEIGHT)
-		my_mlx_pixel_put(data, x, y++, get_int_color(data->rgb_ceiling));
+		my_mlx_pixel_put(data, x, y++, get_int_color(data->rgb_floor));
 }
 
 int	render(t_data *data)

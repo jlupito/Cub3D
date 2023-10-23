@@ -8,7 +8,7 @@ int	handle_keypress(int keysym, t_data *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
 	}
-	if (keysym == XK_Left)
+	if (keysym == XK_a)
 	{
 		data->ray->old_dir_x = data->ray->dir_x;
 		data->ray->dir_x = data->ray->dir_x * cos(ROTSPEED) - data->ray->dir_y * sin(ROTSPEED);
@@ -17,7 +17,7 @@ int	handle_keypress(int keysym, t_data *data)
 		data->ray->plane_x = data->ray->plane_x * cos(ROTSPEED) - data->ray->plane_y * sin(ROTSPEED);
 		data->ray->plane_y = data->ray->old_plane_x * sin(ROTSPEED) + data->ray->plane_y * cos(ROTSPEED);
 	}
-	if (keysym == XK_Right)
+	if (keysym == XK_d)
 	{
 		data->ray->old_dir_x = data->ray->dir_x;
 		data->ray->dir_x = data->ray->dir_x * cos(-ROTSPEED) - data->ray->dir_y * sin(-ROTSPEED);
@@ -26,7 +26,7 @@ int	handle_keypress(int keysym, t_data *data)
 		data->ray->plane_x = data->ray->plane_x * cos(-ROTSPEED) - data->ray->plane_y * sin(-ROTSPEED);
 		data->ray->plane_y = data->ray->old_plane_x * sin(-ROTSPEED) + data->ray->plane_y * cos(-ROTSPEED);
 	}
-	if (keysym == XK_Up)
+	if (keysym == XK_w)
 	{
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				+ data->ray->dir_x * MOVESPEED)] == false)
@@ -35,7 +35,7 @@ int	handle_keypress(int keysym, t_data *data)
 				* MOVESPEED)][(int)(data->ray->pos_x)] == false)
 			data->ray->pos_y += data->ray->dir_y * MOVESPEED;
 	}
-	if (keysym == XK_Down)
+	if (keysym == XK_s)
 	{
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				- data->ray->dir_x * MOVESPEED)] == false)

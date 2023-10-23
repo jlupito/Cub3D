@@ -26,14 +26,53 @@ int	init_data(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	init_player_pos(char *str, int y, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == 'N' || str[i] == 'W' || str[i] == 'E'
+				|| str[i] == 'S') && !data->player)
+		{
+			data->ray->pos_x = i;
+			data->ray->pos_y = y;
+			data->ray->plane_x = 0;
+			data->ray->plane_y = 0.66;
+			if (str[i] == 'N')
+			{
+				data->ray->dir_x = i;
+				data->ray->dir_y = y - 1;
+			}
+			else if (str[i] == 'W')
+			{
+				data->ray->dir_x = i - 1;
+				data->ray->dir_y = y;
+			}
+			else if (str[i] == 'E')
+			{
+				data->ray->dir_x = i;
+				data->ray->dir_y = y - 1;
+			}
+			else if (str[i] == 'S')
+			{
+				data->ray->dir_x = i + 1;
+				data->ray->dir_y = y;
+			}
+			data->player++;
+			return (EXIT_SUCCESS);
+		}
+		else if ((str[i] == 'N' || str[i] == 'W' || str[i] == 'E'
+				|| str[i] == 'S') && data->player)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	init_ray_cast(t_ray *ray)
 {
-	ray->pos_x = 0;
-	ray->pos_y = 0;
-	ray->dir_x = 0;
-	ray->dir_y = 0;
-	ray->plane_x = 0;
-	ray->plane_y = 0.66;
 	ray->ray_dir_x = 0;
 	ray->ray_dir_y = 0;
 	ray->camera_x = 0;
@@ -49,16 +88,12 @@ void	init_ray_cast(t_ray *ray)
 	ray->perp_wall_dist = 0;
 	ray->line_height = 0;
 	ray->draw_end = 0;
-	ray->world_map = NULL;
+	ray->draw_start = 0;
 	ray->old_dir_x = 0;
 	ray->old_plane_x = 0;
 	ray->tex_img = 0;
-	ray->tex_height = 0;
-	ray->tex_incr_y = 0;
 	ray->step_tex = 0;
 	ray->tex_pos = 0;
-	ray->tex_num = 0;
-	ray->tex_width = 0;
 	ray->tex_x = 0;
 	ray->tex_y = 0;
 	ray->wall_x = 0;

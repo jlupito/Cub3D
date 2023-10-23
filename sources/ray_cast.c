@@ -85,7 +85,6 @@ void	prep_drawing(t_data *data)
 	data->ray->draw_end = data->ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (data->ray->draw_end >= WIN_HEIGHT)
 		data->ray->draw_end = WIN_HEIGHT - 1;
-
 	if (data->ray->side == 0 && data->ray->ray_dir_x < 0)
 		data->ray->tex_img = 1;
 	else if (data->ray->side == 0 && data->ray->ray_dir_x > 0)
@@ -94,7 +93,10 @@ void	prep_drawing(t_data *data)
 		data->ray->tex_img = 3;
 	else if (data->ray->side == 1 && data->ray->ray_dir_y > 0)
 		data->ray->tex_img = 4;
+}
 
+void	calc_texture(t_data *data)
+{
 	if (data->ray->side == 0)
 		data->ray->wall_x = data->ray->pos_y + data->ray->perp_wall_dist
 			* data->ray->dir_y;
@@ -102,10 +104,10 @@ void	prep_drawing(t_data *data)
 		data->ray->wall_x = data->ray->pos_x + data->ray->perp_wall_dist
 			* data->ray->dir_x;
 	data->ray->wall_x -= floor(data->ray->wall_x);
-	data->ray->tex_x = (int)(data->ray->wall_x * (double)data->ray->tex_width);
+	data->ray->tex_x = (int)(data->ray->wall_x * (double)TEX_WIDTH);
 	if ((data->ray->side == 0 && data->ray->dir_x > 0)
 		|| (data->ray->side == 1 && data->ray->dir_y < 0))
-		data->ray->tex_x = data->ray->tex_width - data->ray->tex_x - 1;
+		data->ray->tex_x = TEX_WIDTH - data->ray->tex_x - 1;
 	data->ray->step_tex = 1.0 * TEX_HEIGHT / data->ray->line_height;
 	data->ray->tex_pos = (data->ray->draw_start - WIN_HEIGHT / 2
 			+ data->ray->line_height / 2) * data->ray->step_tex;

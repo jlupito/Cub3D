@@ -17,7 +17,7 @@ int	game_init(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (EXIT_FAILURE);
@@ -25,10 +25,8 @@ int	game_init(t_data *data)
 			WIN_HEIGHT, "cub3D");
 	if (!data->win_ptr)
 		return (free(data->mlx_ptr), EXIT_FAILURE);
-	while (i < 5)
+	while (++i < 5)
 	{
-		printf("i: %d\n", i);
-		printf("path: %s, width: %ls, height: %ls\n", data->img[i].path, &data->img[i].width, &data->img[i].height);
 		if (i == 0)
 			data->img[i].img_ptr = mlx_new_image(data->mlx_ptr,
 					WIN_WIDTH, WIN_HEIGHT);
@@ -37,7 +35,6 @@ int	game_init(t_data *data)
 					data->img[i].path, &data->img[i].width, &data->img[i].height);
 		data->img[i].addr = mlx_get_data_addr(data->img[i].img_ptr,
 				&data->img[i].bpp, &data->img[i].line_len, &data->img[i].endian);
-		i++;
 	}
 	return (0);
 }
@@ -48,8 +45,8 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
-	// if (check_args(ac, av))
-	// 	return (EXIT_FAILURE);
+	if (check_args(ac, av))
+		return (EXIT_FAILURE);
 	if (init_data(&data))
 		return (free_all(&data), EXIT_FAILURE);
 	if (save_data(av[1], &data, 0))

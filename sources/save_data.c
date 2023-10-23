@@ -12,7 +12,7 @@ int	fill_map(char *str, t_data *data, int i)
 	data->map_char[i] = ft_strdup(str);
 	if (!data->map_char[i])
 		return (1);
-	if (search_player_pos(data->map_char[i], i, data))
+	if (init_player_pos(data->map_char[i], i, data))
 		return (1);
 	if (i == (data->nb_line - 1))
 		data->map_char[i + 1] = NULL;
