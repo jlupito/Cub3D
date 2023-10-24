@@ -89,7 +89,7 @@ void	prep_drawing(t_ray *ray)
 	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
-	printf("ray->draw_end [%d]\n", ray->draw_end);
+	// printf("ray->draw_end [%d]\n", ray->draw_end);
 	if (ray->side == 1 && ray->ray_dir_y < 0)
 		ray->tex_img = 1; // NORTH
 	else if (ray->side == 1 && ray->ray_dir_y > 0)
