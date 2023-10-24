@@ -16,10 +16,10 @@
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define YELLOW 0xFFFF00
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-# define TEX_WIDTH 64
-# define TEX_HEIGHT 64
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
+# define TEX_WIDTH 100
+# define TEX_HEIGHT 100
 # define ROTSPEED 0.05
 # define MOVESPEED 0.05
 
@@ -96,11 +96,11 @@ int		fill_colors(char *str, t_data *data);
 int		fill_text(char *str, t_data *data);
 int		text_colors_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
-// int		search_player_pos(char *str, int y, t_data *data);
 
 /********** UTILS ***********/
 void	free_tabs(char **tab);
 void	free_all(t_data *data);
+void	close_all(t_data *data);
 void	print_map(t_data *data);
 
 /********** DRAW ***********/
@@ -111,11 +111,11 @@ int		get_int_color(int rgb[3]);
 int		render(t_data *data);
 
 /********** RAY_CAST ***********/
-void	ray_throw(t_data *data, int x);
-void	step_side_dist(t_data *data);
-void	prep_drawing(t_data *data);
-void	perform_dda(t_data *data);
-void	calc_texture(t_data *data);
+void	ray_throw(t_ray *ray, int x);
+void	step_side_dist(t_ray *ray);
+void	prep_drawing(t_ray *ray);
+void	perform_dda(t_ray *ray, t_data *data);
+void	calc_texture(t_ray *ray);
 int		game_init(t_data *data);
 int		game_loop(t_data *data);
 

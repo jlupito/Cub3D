@@ -3,13 +3,11 @@
 
 int	game_loop(t_data *data)
 {
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, &data);
-	mlx_hook(data->win_ptr, 17, 0, handle_buttonpress, &data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
+	mlx_hook(data->win_ptr, 17, 0, handle_buttonpress, data);
+	render(data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_loop(data->mlx_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img[0].img_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
 	return (0);
 }
 
@@ -25,6 +23,7 @@ int	game_init(t_data *data)
 			WIN_HEIGHT, "cub3D");
 	if (!data->win_ptr)
 		return (free(data->mlx_ptr), EXIT_FAILURE);
+	printf("pos x: %f, pos y : %f\n", data->ray->pos_x, data->ray->pos_y);
 	while (++i < 5)
 	{
 		if (i == 0)
@@ -35,6 +34,7 @@ int	game_init(t_data *data)
 					data->img[i].path, &data->img[i].width, &data->img[i].height);
 		data->img[i].addr = mlx_get_data_addr(data->img[i].img_ptr,
 				&data->img[i].bpp, &data->img[i].line_len, &data->img[i].endian);
+		printf("img.height [%d]\n", data->img[i].height);
 	}
 	return (0);
 }
@@ -57,6 +57,6 @@ int	main(int ac, char **av)
 		return (free_all(&data), EXIT_FAILURE);
 	game_loop(&data);
 	// print_map(data);
-	free_all(&data);
+	// free_all(&data);
 	return (0);
 }

@@ -16,7 +16,8 @@ void	draw_verti(t_data *data, int x)
 	int	y;
 
 	y = 0;
-	calc_texture(data);
+	calc_texture(data->ray);
+	// printf("start [%d] end [%d]\n", data->ray->draw_start, data->ray->draw_end);
 	while (y < data->ray->draw_start)
 		my_mlx_pixel_put(data, x, y++, get_int_color(data->rgb_ceiling));
 	while (y < data->ray->draw_end)
@@ -37,10 +38,10 @@ int	render(t_data *data)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		ray_throw(data, x);
-		step_side_dist(data);
-		perform_dda(data);
-		prep_drawing(data);
+		ray_throw(data->ray, x);
+		step_side_dist(data->ray);
+		perform_dda(data->ray, data);
+		prep_drawing(data->ray);
 		draw_verti(data, x);
 		x++;
 	}

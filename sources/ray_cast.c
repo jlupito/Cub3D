@@ -1,114 +1,119 @@
 
 #include <../includes/cub3d.h>
 
-void	ray_throw(t_data *data, int x)
+void	ray_throw(t_ray *ray, int x)
 {
-	data->ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-	data->ray->ray_dir_x = data->ray->dir_x + data->ray->plane_x
-		* data->ray->camera_x;
-	data->ray->ray_dir_y = data->ray->dir_y + data->ray->plane_y
-		* data->ray->camera_x;
-	data->ray->map_x = (int)data->ray->pos_x;
-	data->ray->map_y = (int)data->ray->pos_y;
-	if (data->ray->ray_dir_x == 0)
-		data->ray->delta_dist_x = INT_MAX;
+	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	ray->ray_dir_x = ray->dir_x + \
+		ray->plane_x * ray->camera_x;
+	ray->ray_dir_y = ray->dir_y + \
+		ray->plane_y * ray->camera_x;
+	ray->map_x = (int)ray->pos_x;
+	ray->map_y = (int)ray->pos_y;
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = INT_MAX;
 	else
-		data->ray->delta_dist_x = fabs(1 / data->ray->ray_dir_x);
-	if (data->ray->ray_dir_y == 0)
-		data->ray->delta_dist_y = INT_MAX;
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = INT_MAX;
 	else
-		data->ray->delta_dist_y = fabs(1 / data->ray->ray_dir_y);
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
-void	step_side_dist(t_data *data)
+void	step_side_dist(t_ray *ray)
 {
-	data->ray->hit = 0;
-	if (data->ray->ray_dir_x < 0)
+	ray->hit = 0;
+	if (ray->ray_dir_x < 0)
 	{
-		data->ray->step_x = -1;
-		data->ray->side_dist_x = (data->ray->pos_x - data->ray->map_x)
-			* data->ray->delta_dist_x;
+		ray->step_x = -1;
+		ray->side_dist_x = (ray->pos_x - ray->map_x)
+			* ray->delta_dist_x;
 	}
 	else
 	{
-		data->ray->step_x = 1;
-		data->ray->side_dist_x = (data->ray->map_x + 1.0 - data->ray->pos_x)
-			* data->ray->delta_dist_x;
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - ray->pos_x)
+			* ray->delta_dist_x;
 	}
-	if (data->ray->ray_dir_y < 0)
+	if (ray->ray_dir_y < 0)
 	{
-		data->ray->step_y = -1;
-		data->ray->side_dist_y = (data->ray->pos_y - data->ray->map_y)
-			* data->ray->delta_dist_y;
+		ray->step_y = -1;
+		ray->side_dist_y = (ray->pos_y - ray->map_y)
+			* ray->delta_dist_y;
 	}
 	else
 	{
-		data->ray->step_y = 1;
-		data->ray->side_dist_y = (data->ray->map_y + 1.0 - data->ray->pos_y)
-			* data->ray->delta_dist_y;
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y)
+			* ray->delta_dist_y;
 	}
+	// printf("ray->side_dist_x [%f] ray->side_dist_y [%f]\n", ray->side_dist_x, ray->side_dist_y);
 }
 
-void	perform_dda(t_data *data)
+void	perform_dda(t_ray *ray, t_data *data)
 {
-	while (data->ray->hit == 0)
+	while (ray->hit == 0)
 	{
-		if (data->ray->side_dist_x < data->ray->side_dist_y)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			data->ray->side_dist_x += data->ray->delta_dist_x;
-			data->ray->map_x += data->ray->step_x;
-			data->ray->side = 0;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
 		}
 		else
 		{
-			data->ray->side_dist_y += data->ray->delta_dist_y;
-			data->ray->map_y += data->ray->step_y;
-			data->ray->side = 1;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
 		}
-		if (data->map_char[data->ray->map_y][data->ray->map_x] > 0)
-			data->ray->hit = 1;
+		if (ray->map_x < 0.25 || ray->map_y < 0.25
+			|| data->map_char[ray->map_y][ray->map_x] == '1')
+			ray->hit = 1;
 	}
-	if (data->ray->side == 0)
-		data->ray->perp_wall_dist = (data->ray->side_dist_x
-				- data->ray->delta_dist_x);
+	// printf("ray->hit [%d]\n", ray->hit);
+	// printf("ray->side_dist_x [%f] ray->side_dist_y [%f]\n", ray->side_dist_x, ray->side_dist_y);
+	if (ray->side == 0)
+		ray->perp_wall_dist = (ray->side_dist_x
+				- ray->delta_dist_x);
 	else
-		data->ray->perp_wall_dist = (data->ray->side_dist_y
-				- data->ray->delta_dist_y);
+		ray->perp_wall_dist = (ray->side_dist_y
+				- ray->delta_dist_y);
 }
 
-void	prep_drawing(t_data *data)
+void	prep_drawing(t_ray *ray)
 {
-	data->ray->line_height = (int)(WIN_HEIGHT / data->ray->perp_wall_dist);
-	data->ray->draw_start = -data->ray->line_height / 2 + WIN_HEIGHT / 2;
-	if (data->ray->draw_start < 0)
-		data->ray->draw_start = 0;
-	data->ray->draw_end = data->ray->line_height / 2 + WIN_HEIGHT / 2;
-	if (data->ray->draw_end >= WIN_HEIGHT)
-		data->ray->draw_end = WIN_HEIGHT - 1;
-	if (data->ray->side == 0 && data->ray->ray_dir_x < 0)
-		data->ray->tex_img = 1;
-	else if (data->ray->side == 0 && data->ray->ray_dir_x > 0)
-		data->ray->tex_img = 2;
-	else if (data->ray->side == 1 && data->ray->ray_dir_y < 0)
-		data->ray->tex_img = 3;
-	else if (data->ray->side == 1 && data->ray->ray_dir_y > 0)
-		data->ray->tex_img = 4;
+	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
+	ray->draw_start = WIN_HEIGHT / 2 - ray->line_height / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
+	if (ray->draw_end >= WIN_HEIGHT)
+		ray->draw_end = WIN_HEIGHT - 1;
+	printf("ray->draw_end [%d]\n", ray->draw_end);
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		ray->tex_img = 1; // NORTH
+	else if (ray->side == 1 && ray->ray_dir_y > 0)
+		ray->tex_img = 2; // SOUTH	
+	else if (ray->side == 0 && ray->ray_dir_x < 0)
+		ray->tex_img = 3; // WEST
+	else if (ray->side == 0 && ray->ray_dir_x > 0)
+		ray->tex_img = 4; // EAST
 }
 
-void	calc_texture(t_data *data)
+void	calc_texture(t_ray *ray)
 {
-	if (data->ray->side == 0)
-		data->ray->wall_x = data->ray->pos_y + data->ray->perp_wall_dist
-			* data->ray->dir_y;
+	if (ray->side == 0)
+		ray->wall_x = ray->pos_y + \
+			(ray->perp_wall_dist * ray->dir_y);
 	else
-		data->ray->wall_x = data->ray->pos_x + data->ray->perp_wall_dist
-			* data->ray->dir_x;
-	data->ray->wall_x -= floor(data->ray->wall_x);
-	data->ray->tex_x = (int)(data->ray->wall_x * (double)TEX_WIDTH);
-	if ((data->ray->side == 0 && data->ray->dir_x > 0)
-		|| (data->ray->side == 1 && data->ray->dir_y < 0))
-		data->ray->tex_x = TEX_WIDTH - data->ray->tex_x - 1;
-	data->ray->step_tex = 1.0 * TEX_HEIGHT / data->ray->line_height;
-	data->ray->tex_pos = (data->ray->draw_start - WIN_HEIGHT / 2
-			+ data->ray->line_height / 2) * data->ray->step_tex;
+		ray->wall_x = ray->pos_x + \
+			(ray->perp_wall_dist * ray->dir_x);
+	ray->wall_x -= floor(ray->wall_x);
+	ray->tex_x = (int)(ray->wall_x * (double)TEX_WIDTH);
+	if ((ray->side == 0 && ray->dir_x > 0)
+		|| (ray->side == 1 && ray->dir_y < 0))
+		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
+	ray->step_tex = 1.0 * TEX_HEIGHT / ray->line_height;
+	ray->tex_pos = ((double)ray->draw_start - ((double)WIN_HEIGHT / 2)\
+			+ (ray->line_height / 2)) * ray->step_tex;
 }

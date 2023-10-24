@@ -22,26 +22,34 @@ void	free_all(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (++i < 5)
-	{
-		if (data->img[i].path)
-			free(data->img[i].path);
-	}
+	i = -1;
 	if (data->rgb_ceiling[3])
 		free(data->rgb_ceiling);
 	if (data->rgb_floor[3])
 		free(data->rgb_floor);
 	if (data->map_char)
 		free_tabs(data->map_char);
-	// if (data->ray->world_map)
-	// 	free_tabs(data->ray->world_map);
 	if (data->ray)
 		free(data->ray);
-	// if (data->img)
-	// 	free(data->img);
-	// if (data)
-	// 	free(data);
+	while (++i < 5)
+	{
+		if (data->img[i].path && i != 0)
+			free(data->img[i].path);
+	}
+}
+
+void	close_all(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	mlx_destroy_image(data->mlx_ptr, data->img[0].img_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	while (++i < 5)
+		free(data->img[i].img_ptr);
+	data->win_ptr = NULL;
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
 }
 
 void	print_map(t_data *data)
