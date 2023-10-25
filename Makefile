@@ -9,7 +9,7 @@ MLX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 #source
 SRCS_DIR = sources/
 SRCS = main.c save_data.c utils.c parsing.c color.c hooks.c ray_cast.c\
-		draw.c init.c\
+		draw.c init.c parsing_utils.c \
 
 SRCS_PREFIXED = $(addprefix $(SRCS_DIR), $(SRCS))
 

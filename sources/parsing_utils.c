@@ -6,43 +6,43 @@ void	ft_error(char *message)
 	ft_putstr_fd(message, STDERR_FILENO);
 }
 
-bool empty_line(char *str) // OK
+bool	empty_line(char *str)
 {
 	while (*str)
 	{
 		if ((*str != ' ') || (*str != '\t'))
-			return false;
+			return (false);
 		str++;
 	}
-	return true;
+	return (true);
 }
 
-int	check_empty_line(t_data *data) // OK
+int	check_empty_line(t_data *data)
 {
 	int	y;
 
 	y = -1;
-	while (data->map->map_char[++y])
-		if (empty_line(data->map->map_char[y]))
-			return (1);
-	return (SUCCESS);
+	while (data->map_char[++y])
+		if (empty_line(data->map_char[y]))
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	is_nothing(char c)
 {
 	if (!c)
-		return (1);
+		return (EXIT_FAILURE);
 	if (c != ' ')
-		return (SUCCESS);
+		return (EXIT_SUCCESS);
 	return (1);
 }
 
-bool	test_path_texture(char *code_texture) // OK mais verifier les index
+bool	test_path_texture(char *code_texture)
 {
 	char	*path;
-	int	i;
+	int		i;
 
-	i = 4; // attention debut a l'index 0
+	i = 4;
 	if (!code_texture || !code_texture[i])
 		return (NULL);
 	while (code_texture[i])
@@ -51,10 +51,7 @@ bool	test_path_texture(char *code_texture) // OK mais verifier les index
 	if (!path)
 		return (false);
 	if (!access(path, F_OK))
-	{
-		free(path);
-		return (false);
-	}
+		return (free(path), false);
 	else
-		return (true);
+		return (free(path), true);
 }

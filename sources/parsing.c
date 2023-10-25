@@ -1,139 +1,114 @@
 #include <../includes/cub3d.h>
 
-// les 0 doivent forcement etre entoures par quelque chose (0 ou 1 ou player)
-// donc on verifie pour chaque 0, si un 0 a un cote ' ', la map est brechee.
-int	check_closed_map(t_data *data) // ok
+int	check_closed_map(t_data *data)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	while (data->map->map_char[++y])
+	while (data->map_char[++y])
 	{
 		x = -1;
-		while (data->map->map_char[y][++x])
+		while (data->map_char[y][++x])
 		{
-			if (data->map->map_char[y][x] == EMPTY)
+			if (data->map_char[y][x] == 0)
 			{
-					if ((is_nothing(data->map->map_char[y - 1][x]))
-					|| (is_nothing(data->map->map_char[y + 1][x]))
-					|| (is_nothing(data->map->map_char[y][x - 1]))
-					|| (is_nothing(data->map->map_char[y][x + 1]))
-					|| (is_nothing(data->map->map_char[y + 1][x + 1]))
-					|| (is_nothing(data->map->map_char[y + 1][x - 1]))
-					|| (is_nothing(data->map->map_char[y - 1][x + 1]))
-					|| (is_nothing(data->map->map_char[y - 1][x - 1]))
-					|| (y == 0) || (y = len_tab(data->map->map_char)))
-						return (FAILURE);
+				if ((is_nothing(data->map_char[y - 1][x]))
+				|| (is_nothing(data->map_char[y + 1][x]))
+				|| (is_nothing(data->map_char[y][x - 1]))
+				|| (is_nothing(data->map_char[y][x + 1]))
+				|| (is_nothing(data->map_char[y + 1][x + 1]))
+				|| (is_nothing(data->map_char[y + 1][x - 1]))
+				|| (is_nothing(data->map_char[y - 1][x + 1]))
+				|| (is_nothing(data->map_char[y - 1][x - 1]))
+				|| (y == 0) || (y == len_tab(data->map_char)))
+					return (EXIT_FAILURE);
 			}
 		}
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
-int	check_elements_map(t_data *data) // OK
+int	check_elements_map(t_data *data)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	while (data->map->map_char[++y])
+	while (data->map_char[++y])
 	{
 		x = -1;
-		while (data->map->map_char[y][++x])
+		while (data->map_char[y][++x])
 		{
-			if ((data->map->map_char[y][x] != 'N')
-				&& (data->map->map_char[y][x] != 'S')
-				&& (data->map->map_char[y][x] != 'E')
-				&& (data->map->map_char[y][x] != 'W')
-				&& (data->map->map_char[y][x] != WALL)
-				&& (data->map->map_char[y][x] != EMPTY)
-				&& (data->map->map_char[y][x] != ' '))
-				return (FAILURE);
+			if ((data->map_char[y][x] != 'N')
+				&& (data->map_char[y][x] != 'S')
+				&& (data->map_char[y][x] != 'E')
+				&& (data->map_char[y][x] != 'W')
+				&& (data->map_char[y][x] != 1)
+				&& (data->map_char[y][x] != 0)
+				&& (data->map_char[y][x] != ' '))
+				return (EXIT_FAILURE);
 		}
 	}
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	count_map_elements(t_data *data) // OK - a voir si faite par JLO
 {
 	int	x;
 	int	y;
-	int player;
+	int	player;
 
 	x = -1;
 	y = -1;
 	player = 0;
-	while (data->map->map_char[++y])
+	while (data->map_char[++y])
 	{
-		while (data->map->map_char[y][++x])
+		while (data->map_char[y][++x])
 		{
-			if ((data->map->map_char[y][x] == 'N')
-				&& (data->map->map_char[y][x] == 'S')
-				&& (data->map->map_char[y][x] == 'E')
-				&& (data->map->map_char[y][x] == 'W'))
+			if ((data->map_char[y][x] == 'N')
+				&& (data->map_char[y][x] == 'S')
+				&& (data->map_char[y][x] == 'E')
+				&& (data->map_char[y][x] == 'W'))
 				player++;
 		}
 	}
 	if ((player != 1))
-		return (FAILURE);
-	return (SUCCESS);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-bool	parsing_textures(t_data *data) // si espace ou tab ?
+int	parsing_textures(t_data *data) // si espace ou tab ?
 {
 	int	i;
 
-	if (!(data->map->no_text) || !(data->map->so_text)
-		|| !(data->map->we_text) || !(data->map->ea_text))
-			return false;
-	if (ft_strncmp(data->map->no_text, "NO ./", 5)
-		|| ft_strncmp(data->map->so_text, "SO ./", 5)
-		|| ft_strncmp(data->map->we_text, "NO ./", 5)
-		|| ft_strncmp(data->map->ea_text, "NO ./", 5))
-		return false;
-	if (!test_path_texture(data->map->no_text)
-		|| !test_path_texture(data->map->so_text)
-		|| !test_path_texture(data->map->we_text)
-		|| !test_path_texture(data->map->ea_text))
-			return false;
-}
-
-bool	parsing_colors(t_data *data)  // TEST si on entre autre chose que int (demi parsing ?)
-{
-	int	i;
-	int	j;
-
-	if (!data->map->rgb_ceiling || !data->map->rgb_floor)
-		return false;
-	// REPENSER LE PARSING AU NiVEAU DES COLORS ?? char ** ? parser avant ou apres ?
-	i = -1;
-	while (++i < 3)
+	i = 0;
+	while (++i < 5)
 	{
-		if ((data->map->rgb_ceiling[i] < 0)
-			|| (data->map->rgb_ceiling[i]) > 255)
-			return false;
+		if (!(data->img[i].path))
+			return (EXIT_FAILURE);
+		if (ft_strncmp(data->img[i].path, "NO ./", 5)
+			|| ft_strncmp(data->img[i].path, "SO ./", 5)
+			|| ft_strncmp(data->img[i].path, "WE ./", 5)
+			|| ft_strncmp(data->img[i].path, "EA ./", 5))
+			return (EXIT_FAILURE);
+		if (!test_path_texture(data->img[i].path))
+			return (EXIT_FAILURE);
 	}
-	j = -1;
-	while (++j < 3)
-	{
-		if ((data->map->rgb_floor[i] < 0)
-			|| (data->map->rgb_floor[i]) > 255)
-			return false;
-	}
+	return (EXIT_SUCCESS);
 }
 
 int	parsing(t_data *data)
 {
 	if (check_empty_line(data))
-		ft_error("---MAP HAS EMPTY LINE---\n");
+		return (ft_error("---MAP HAS EMPTY LINE---\n"), EXIT_FAILURE);
 	if (!check_closed_map(data))
-		ft_error("---MAP IS NOT CLOSED---\n");
+		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);
 	if (!check_elements_map(data))
-		ft_error("---UNAPPROVED MAP COMPONENT---\n");
+		return (ft_error("---UNAPPROVED MAP COMPONENT---\n"), EXIT_FAILURE);
 	if (!count_map_elements(data))
-		ft_error("---WRONG NUMBER OF PLAYERS---\n");
+		return (ft_error("---WRONG NUMBER OF PLAYERS---\n"), EXIT_FAILURE);
 	if (!parsing_textures(data) || ! parsing_colors(data))
-		ft_error("---ERROR IN TEXTURES & COLORS---\n");
-	return (SUCCESS);
+		return (ft_error("---ERROR IN TEXTURES & COLORS---\n"), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

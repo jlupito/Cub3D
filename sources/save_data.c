@@ -61,7 +61,7 @@ int	fill_colors(char *str, t_data *data)
 	else
 		data->rgb_ceiling[3] = 1;
 	free_tabs(tmp);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	fill_text(char *str, t_data *data)

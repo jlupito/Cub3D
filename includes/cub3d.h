@@ -98,19 +98,23 @@ int		text_colors_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
 
 /************************PARSING*************************/
-int	parsing(t_data *data);
-int	count_map_elements(t_data *data);
-int	check_elements_map(t_data *data);
-int	check_closed_map(t_data *data);
-bool empty_line(char *str);
-int	check_empty_line(t_data *data);
+int		parsing(t_data *data);
+int		parsing_textures(t_data *data);
+int		count_map_elements(t_data *data);
+int		check_elements_map(t_data *data);
+int		check_closed_map(t_data *data);
+bool	empty_line(char *str);
+int		check_empty_line(t_data *data);
+bool	parsing_colors(t_data *data);
 
 /***********************  UTILS  ************************/
 void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	close_all(t_data *data);
-void	print_map(t_data *data);
+// void	print_map(t_data *data);
 int		len_tab(char **tab);
+int		is_nothing(char c);
+bool	test_path_texture(char *code_texture);
 
 /*********************** ERRORS ************************/
 void	ft_error(char *message);
