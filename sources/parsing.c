@@ -86,14 +86,10 @@ int	parsing_textures(t_data *data) // si espace ou tab ?
 	i = 1;
 	while (i < 5)
 	{
-		printf("Path is : %s\n", data->img[i].path);
 		if (!(data->img[i].path))
 			return (EXIT_FAILURE);
 		if (test_path_texture(data->img[i].path) == false)
-		{
-			printf("test numero %d failed\n", i);
 			return (EXIT_FAILURE);
-		}
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -101,9 +97,9 @@ int	parsing_textures(t_data *data) // si espace ou tab ?
 
 int	parsing(t_data *data)
 {
-	print_map(data);
 	// ajouter la verification des droits sur les textures cf So Long.
-	if (check_empty_line(data)) // souci a voir avec JLO
+	// protection de la MLX.
+	if (check_empty_line(data)) // souci a voir avec JLO ?
 		return (ft_error("---MAP HAS EMPTY LINE---\n"), EXIT_FAILURE);
 	if (check_closed_map(data))
 		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);

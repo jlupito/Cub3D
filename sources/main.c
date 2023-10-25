@@ -11,7 +11,7 @@ int	game_loop(t_data *data)
 	return (0);
 }
 
-int	game_init(t_data *data)
+int	game_init(t_data *data)  // PROTEGER LA MLX : si on perd les droits sur une texture
 {
 	int	i;
 

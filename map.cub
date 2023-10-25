@@ -3,7 +3,7 @@ SO ./textures/wood_wall.xpm
 WE ./textures/red_wall.xpm
 EA ./textures/yellow_wall.xpm
 
-C 25,25,112
+C 25,25, 52
 F 251,245,220
 
   111111111111
