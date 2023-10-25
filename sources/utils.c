@@ -33,7 +33,7 @@ void	free_all(t_data *data)
 		free(data->ray);
 	while (++i < 5)
 	{
-		if (data->img[i].path && i != 0)
+		if (data->img[i].path)
 			free(data->img[i].path);
 	}
 }
@@ -43,10 +43,9 @@ void	close_all(t_data *data)
 	int	i;
 
 	i = -1;
-	mlx_destroy_image(data->mlx_ptr, data->img[0].img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	while (++i < 5)
-		free(data->img[i].img_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->img[i].img_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	data->win_ptr = NULL;
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);

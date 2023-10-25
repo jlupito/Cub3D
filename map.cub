@@ -1,15 +1,15 @@
-NO ./textures/text1.xpm
-SO ./textures/text2.xpm
-WE ./textures/text3.xpm
-EA ./textures/text4.xpm
+NO ./textures/blue_wall.xpm
+SO ./textures/yellow_wall.xpm
+WE ./textures/red_wall.xpm
+EA ./textures/wood_wall.xpm
 
-C 225,30,0
-F 220,100,0
+C 25,25,112
+F 245,245,220
 
 11111111111
 10000000001
 10000000001
 10000N00001
-10000000001
-10000000001
+10000101001
+10000101001
 11111111111
