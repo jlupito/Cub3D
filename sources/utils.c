@@ -82,3 +82,13 @@ int	text_colors_filled(t_data *data)
 		return (1);
 	return (0);
 }
+
+int	len_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}

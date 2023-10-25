@@ -84,24 +84,36 @@ typedef struct s_data {
 int		handle_keypress(int keysym, t_data *data);
 int		handle_buttonpress(t_data *data);
 
-/********** INIT ***********/
+/************************ INIT *************************/
 int		save_data(char *infile, t_data *data, int flag);
 int		init_data(t_data *data);
 int		init_player_pos(char *str, int y, t_data *data);
 void	init_ray_cast(t_ray *ray);
 int		check_args(int ac, char **av);
 
-/********** MAP ***********/
+/************************  MAP  *************************/
 int		fill_colors(char *str, t_data *data);
 int		fill_text(char *str, t_data *data);
 int		text_colors_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
 
-/********** UTILS ***********/
+/************************PARSING*************************/
+int	parsing(t_data *data);
+int	count_map_elements(t_data *data);
+int	check_elements_map(t_data *data);
+int	check_closed_map(t_data *data);
+bool empty_line(char *str);
+int	check_empty_line(t_data *data);
+
+/***********************  UTILS  ************************/
 void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	close_all(t_data *data);
 void	print_map(t_data *data);
+int		len_tab(char **tab);
+
+/*********************** ERRORS ************************/
+void	ft_error(char *message);
 
 /********** DRAW ***********/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
