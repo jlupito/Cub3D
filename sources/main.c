@@ -53,8 +53,8 @@ int	main(int ac, char **av)
 		return (free_all(&data), EXIT_FAILURE);
 	if (parsing(&data))
 		return (free_all(&data), EXIT_FAILURE);
-	if (game_init(&data))
-		return (free_all(&data), EXIT_FAILURE);
-	game_loop(&data);
+	// if (game_init(&data))
+	// 	return (free_all(&data), EXIT_FAILURE);
+	// game_loop(&data);
 	return (EXIT_SUCCESS);
 }

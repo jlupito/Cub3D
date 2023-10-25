@@ -111,7 +111,7 @@ int		parsing_colors(t_data *data);
 void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	close_all(t_data *data);
-// void	print_map(t_data *data);
+void	print_map(t_data *data);
 int		len_tab(char **tab);
 int		is_nothing(char c);
 bool	test_path_texture(char *code_texture);
