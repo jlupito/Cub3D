@@ -105,7 +105,7 @@ int		check_elements_map(t_data *data);
 int		check_closed_map(t_data *data);
 bool	empty_line(char *str);
 int		check_empty_line(t_data *data);
-bool	parsing_colors(t_data *data);
+int		parsing_colors(t_data *data);
 
 /***********************  UTILS  ************************/
 void	free_tabs(char **tab);

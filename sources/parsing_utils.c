@@ -34,7 +34,7 @@ int	is_nothing(char c)
 		return (EXIT_FAILURE);
 	if (c != ' ')
 		return (EXIT_SUCCESS);
-	return (1);
+	return (EXIT_FAILURE);
 }
 
 bool	test_path_texture(char *code_texture)

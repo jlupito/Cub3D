@@ -66,6 +66,7 @@ void	perform_dda(t_ray *ray, t_data *data)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
+		// ray->hit = (data->map_char[ray->map_y][ray->map_x] == '1');
 		if (ray->map_x < 0.25 || ray->map_y < 0.25
 			|| data->map_char[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
@@ -111,7 +112,7 @@ void	calc_texture(t_ray *ray)
 	if ((ray->side == 0 && ray->dir_x > 0)
 		|| (ray->side == 1 && ray->dir_y < 0))
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
-	ray->step_tex = 1.0 * TEX_HEIGHT / ray->line_height;
+	ray->step_tex = TEX_HEIGHT * 1.0 / ray->line_height;
 	ray->tex_pos = ((double)ray->draw_start - ((double)WIN_HEIGHT / 2) \
 			+ (ray->line_height / 2)) * ray->step_tex;
 }

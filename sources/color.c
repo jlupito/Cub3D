@@ -19,26 +19,18 @@ int	get_int_color(int rgb[3])
 	return (color);
 }
 
-bool	parsing_colors(t_data *data)  // TEST si on entre autre chose que int (demi parsing ?)
+int	parsing_colors(t_data *data)  // TEST si on entre autre chose que int (demi parsing ?)
 {
 	int	i;
-	int	j;
 
-	if (!data->rgb_ceiling || !data->rgb_floor)
-		return (false);
+	if (!data->rgb_ceiling[3] || !data->rgb_floor[3])
+		return (EXIT_FAILURE);
 	i = -1;
 	while (++i < 3)
 	{
-		if ((data->rgb_ceiling[i] < 0)
-			|| (data->rgb_ceiling[i]) > 255)
-			return (false);
+		if ((data->rgb_ceiling[i] < 0) || (data->rgb_floor[i] < 0)
+			|| (data->rgb_ceiling[i]) > 255 || (data->rgb_floor[i] > 255))
+			return (EXIT_FAILURE);
 	}
-	j = -1;
-	while (++j < 3)
-	{
-		if ((data->rgb_floor[i] < 0)
-			|| (data->rgb_floor[i]) > 255)
-			return (false);
-	}
-	return (true);
+	return (EXIT_SUCCESS);
 }

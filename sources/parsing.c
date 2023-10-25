@@ -11,7 +11,7 @@ int	check_closed_map(t_data *data)
 		x = -1;
 		while (data->map_char[y][++x])
 		{
-			if (data->map_char[y][x] == 0)
+			if (data->map_char[y][x] == '0')
 			{
 				if ((is_nothing(data->map_char[y - 1][x]))
 				|| (is_nothing(data->map_char[y + 1][x]))
@@ -44,8 +44,9 @@ int	check_elements_map(t_data *data)
 				&& (data->map_char[y][x] != 'S')
 				&& (data->map_char[y][x] != 'E')
 				&& (data->map_char[y][x] != 'W')
-				&& (data->map_char[y][x] != 1)
-				&& (data->map_char[y][x] != 0)
+				&& (data->map_char[y][x] != '1')
+				&& (data->map_char[y][x] != '0')
+				&& (data->map_char[y][x] != '\n')
 				&& (data->map_char[y][x] != ' '))
 				return (EXIT_FAILURE);
 		}
@@ -59,17 +60,17 @@ int	count_map_elements(t_data *data) // OK - a voir si faite par JLO
 	int	y;
 	int	player;
 
-	x = -1;
-	y = -1;
 	player = 0;
+	y = -1;
 	while (data->map_char[++y])
 	{
+		x = -1;
 		while (data->map_char[y][++x])
 		{
 			if ((data->map_char[y][x] == 'N')
-				&& (data->map_char[y][x] == 'S')
-				&& (data->map_char[y][x] == 'E')
-				&& (data->map_char[y][x] == 'W'))
+				|| (data->map_char[y][x] == 'S')
+				|| (data->map_char[y][x] == 'E')
+				|| (data->map_char[y][x] == 'W'))
 				player++;
 		}
 	}
@@ -102,13 +103,13 @@ int	parsing(t_data *data)
 {
 	if (check_empty_line(data))
 		return (ft_error("---MAP HAS EMPTY LINE---\n"), EXIT_FAILURE);
-	if (!check_closed_map(data))
+	if (check_closed_map(data))
 		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);
-	if (!check_elements_map(data))
+	if (check_elements_map(data))
 		return (ft_error("---UNAPPROVED MAP COMPONENT---\n"), EXIT_FAILURE);
-	if (!count_map_elements(data))
+	if (count_map_elements(data))
 		return (ft_error("---WRONG NUMBER OF PLAYERS---\n"), EXIT_FAILURE);
-	if (!parsing_textures(data) || ! parsing_colors(data))
+	if (/*parsing_textures(data) || */parsing_colors(data))
 		return (ft_error("---ERROR IN TEXTURES & COLORS---\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

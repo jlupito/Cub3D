@@ -53,8 +53,8 @@ void	close_all(t_data *data)
 
 int	text_colors_filled(t_data *data)
 {
-	if (!data->img[1].path || !data->img[1].path || !data->img[1].path
-		|| !data->img[1].path)
+	if (!data->img[1].path || !data->img[2].path || !data->img[3].path
+		|| !data->img[4].path)
 		return (1);
 	if (!data->rgb_ceiling[3] || !data->rgb_floor[3])
 		return (1);

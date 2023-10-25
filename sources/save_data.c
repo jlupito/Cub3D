@@ -6,7 +6,7 @@ int	check_args(int ac, char **av)
 	int	i;
 
 	if (ac != 2)
-		return (EXIT_FAILURE);
+		return (ft_putendl_fd("Bad number fo arguments", 2), EXIT_FAILURE);
 	i = 0;
 	while (av[1][i] != '.' && av[1][i])
 		i++;
@@ -14,7 +14,7 @@ int	check_args(int ac, char **av)
 		&& av[1][i + 3] == 'b' && av[1][i + 4] == '\0')
 		return (EXIT_SUCCESS);
 	else
-		return (EXIT_FAILURE);
+		return (ft_putendl_fd("Wrong type of map", 2), EXIT_FAILURE);
 }
 
 int	fill_map(char *str, t_data *data, int i)
@@ -135,6 +135,8 @@ int	save_data(char *infile, t_data *data, int flag)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (text_colors_filled(data))
+		return (ft_error("---MISSING MAP COMPONENT---\n"), EXIT_FAILURE);
 	if (!flag)
 		data->nb_line = i;
 	(free(line), close(fd));
