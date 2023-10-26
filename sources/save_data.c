@@ -132,6 +132,8 @@ int	save_data(char *infile, t_data *data, int flag)
 			}
 			i++;
 		}
+		// else if (line[0] != '\n')
+		// 	return (free(line), 1);
 		free(line);
 		line = get_next_line(fd);
 	}

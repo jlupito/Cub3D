@@ -23,12 +23,28 @@ void	free_all(t_data *data)
 	int	i;
 
 	i = -1;
-	if (data->rgb_ceiling[3])
+	if (data->rgb_ceiling)
 		free(data->rgb_ceiling);
-	if (data->rgb_floor[3])
+	if (data->rgb_floor)
 		free(data->rgb_floor);
 	if (data->map_char)
 		free_tabs(data->map_char);
+	if (data->ray)
+		free(data->ray);
+	while (++i < 5)
+	{
+		if (data->img[i].path)
+			free(data->img[i].path);
+	}
+}
+
+void	free_all2(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	free(data->rgb_ceiling);
+	free(data->rgb_floor);
 	if (data->ray)
 		free(data->ray);
 	while (++i < 5)

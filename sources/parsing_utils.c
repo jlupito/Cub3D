@@ -6,20 +6,20 @@ void	ft_error(char *message)
 	ft_putstr_fd(message, STDERR_FILENO);
 }
 
-bool	empty_line(char *str)
+int	empty_line(char *str)
 {
 	int	i;
 
 	i = 0;
 	if (!str[i] || str[i] == '\n')
-		return (false);
+		return (EXIT_FAILURE);
 	while (str[i] && str[i] != '\n')
 	{
 		if ((str[i] != ' ') && (str[i] != '\t'))
-			return (false);
+			return (EXIT_SUCCESS);
 		i++;
 	}
-	return (true);
+	return (EXIT_FAILURE);
 }
 
 int	check_empty_line(t_data *data)
@@ -27,9 +27,11 @@ int	check_empty_line(t_data *data)
 	int	y;
 
 	y = 0;
+	if (!data->map_char)
+		return (EXIT_FAILURE);
 	while (data->map_char[y])
 	{
-		if (empty_line(data->map_char[y]) == true)
+		if (empty_line(data->map_char[y]))
 			return (EXIT_FAILURE);
 		y++;
 	}

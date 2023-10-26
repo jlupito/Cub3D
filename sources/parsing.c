@@ -40,6 +40,7 @@ int	check_elements_map(t_data *data)
 		x = -1;
 		while (data->map_char[y][++x])
 		{
+			printf("%c", data->map_char[y][x]);
 			if ((data->map_char[y][x] != 'N')
 				&& (data->map_char[y][x] != 'S')
 				&& (data->map_char[y][x] != 'E')

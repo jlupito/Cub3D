@@ -93,7 +93,7 @@ void	prep_drawing(t_ray *ray)
 	if (ray->side == 1 && ray->ray_dir_y < 0)
 		ray->tex_img = 1; // NORTH
 	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		ray->tex_img = 2; // SOUTH	
+		ray->tex_img = 2; // SOUTH
 	else if (ray->side == 0 && ray->ray_dir_x < 0)
 		ray->tex_img = 3; // WEST
 	else if (ray->side == 0 && ray->ray_dir_x > 0)
