@@ -70,9 +70,7 @@ void	perform_dda(t_ray *ray, t_data *data)
 		if (ray->map_x < 0.25 || ray->map_y < 0.25
 			|| data->map_char[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
-	// printf("ray->map_x [%d] ray->map_y [%d]\n", ray->map_x,ray->map_y);
 	}
-	// printf("ray->side_dist_x [%f] ray->side_dist_y [%f]\n", ray->side_dist_x, ray->side_dist_y);
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->side_dist_x
 				- ray->delta_dist_x);
@@ -84,7 +82,7 @@ void	perform_dda(t_ray *ray, t_data *data)
 void	prep_drawing(t_ray *ray)
 {
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = WIN_HEIGHT / 2 - ray->line_height / 2;
+	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
@@ -113,6 +111,6 @@ void	calc_texture(t_ray *ray)
 		|| (ray->side == 1 && ray->dir_y < 0))
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 	ray->step_tex = TEX_HEIGHT * 1.0 / ray->line_height;
-	ray->tex_pos = ((double)ray->draw_start - ((double)WIN_HEIGHT / 2) \
+	ray->tex_pos = (ray->draw_start - (WIN_HEIGHT / 2) \
 			+ (ray->line_height / 2)) * ray->step_tex;
 }

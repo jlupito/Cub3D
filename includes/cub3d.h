@@ -53,7 +53,7 @@ typedef struct s_ray {
 	double	step_tex;
 	double	tex_pos;
 	int		tex_x;
-	int		tex_y;
+	// int		tex_y;
 	double	wall_x;
 }				t_ray;
 

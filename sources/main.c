@@ -19,8 +19,7 @@ int	game_init(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (EXIT_FAILURE);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH,
-			WIN_HEIGHT, "cub3D");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!data->win_ptr)
 		return (free(data->mlx_ptr), EXIT_FAILURE);
 	// printf("pos x: %f, pos y : %f\n", data->ray->pos_x, data->ray->pos_y);

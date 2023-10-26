@@ -8,7 +8,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		return ;
 	pixel = (data->img[0].addr + (y * data->img[0].line_len + x * \
 		(data->img[0].bpp / 8)));
-	*(unsigned int *)pixel = color;
+	*(int *)pixel = color;
 }
 
 void	draw_verti(t_data *data, int x)

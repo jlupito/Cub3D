@@ -38,18 +38,16 @@ int	init_player_pos(char *str, int y, t_data *data)
 		{
 			data->ray->pos_x = i;
 			data->ray->pos_y = y;
-			// data->ray->plane_x = 0;
-			// data->ray->plane_y = 0.66;
 			if (str[i] == 'N')
 			{
 				data->ray->dir_x = 0;
-				data->ray->dir_y = - 1;
+				data->ray->dir_y = -1;
 				data->ray->plane_x = 0.66;
 				data->ray->plane_y = 0;
 			}
 			else if (str[i] == 'W')
 			{
-				data->ray->dir_x = - 1;
+				data->ray->dir_x = -1;
 				data->ray->dir_y = 0;
 				data->ray->plane_x = 0;
 				data->ray->plane_y = 0.66;
@@ -103,6 +101,6 @@ void	init_ray_cast(t_ray *ray)
 	ray->step_tex = 0;
 	ray->tex_pos = 0;
 	ray->tex_x = 0;
-	ray->tex_y = 0;
+	// ray->tex_y = 0;
 	ray->wall_x = 0;
 }
