@@ -97,9 +97,7 @@ int	parsing_textures(t_data *data) // si espace ou tab ?
 
 int	parsing(t_data *data)
 {
-	// ajouter la verification des droits sur les textures cf So Long.
-	// protection de la MLX.
-	if (check_empty_line(data)) // souci a voir avec JLO ?
+	if (check_empty_line(data))
 		return (ft_error("---MAP HAS EMPTY LINE---\n"), EXIT_FAILURE);
 	if (check_closed_map(data))
 		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);
