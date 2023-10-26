@@ -71,25 +71,25 @@ int	len_tab(char **tab)
 	return (i);
 }
 
+// void	print_map(t_data *data)
+// {
+// 	int	i;
 
-void	print_map(t_data *data)
-{
-	int	i;
-
-	i = -1;
-	printf("text: %s\n", data->img[1].path);
-	printf("text: %s\n", data->img[2].path);
-	printf("text: %s\n", data->img[3].path);
-	printf("text: %s\n", data->img[4].path);
-	while (++i < 3)
-		printf("rgb_ceil: %d\n", data->rgb_ceiling[i]);
-	i = -1;
-	while (++i < 3)
-		printf("rgb_floor: %d\n", data->rgb_floor[i]);
-	i = 0;
-	while (data->map_char[i])
-	{
-		printf("map: %s\n", data->map_char[i]);
-		i++;
-	}
-}
+// 	i = -1;
+// 	printf("text: %s\n", data->img[1].path);
+// 	printf("text: %s\n", data->img[2].path);
+// 	printf("text: %s\n", data->img[3].path);
+// 	printf("text: %s\n", data->img[4].path);
+// 	while (++i < 3)
+// 		printf("rgb_ceil: %d\n", data->rgb_ceiling[i]);
+// 	i = -1;
+// 	while (++i < 3)
+// 		printf("rgb_floor: %d\n", data->rgb_floor[i]);
+// 	i = 0;
+// 	while (data->map_char[i])
+// 	{
+// 		printf("map: %s\n", data->map_char[i]);
+// 		i++;
+// 	}
+// }
+// 

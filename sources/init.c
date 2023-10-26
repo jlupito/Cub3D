@@ -26,53 +26,70 @@ int	init_data(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+void	init_pos_nw(t_data *data, int flag, int i, int y)
+{
+	data->ray->pos_x = i;
+	data->ray->pos_y = y;
+	if (flag)
+	{
+		data->ray->dir_x = 0;
+		data->ray->dir_y = -1;
+		data->ray->plane_x = 0.66;
+		data->ray->plane_y = 0;
+	}
+	else if (!flag)
+	{
+		data->ray->dir_x = -1;
+		data->ray->dir_y = 0;
+		data->ray->plane_x = 0;
+		data->ray->plane_y = 0.66;
+	}
+}
+
+void	init_pos_se(t_data *data, int flag, int i, int y)
+{
+	data->ray->pos_x = i;
+	data->ray->pos_y = y;
+	if (flag)
+	{
+		data->ray->dir_x = 1;
+		data->ray->dir_y = 0;
+		data->ray->plane_x = 0;
+		data->ray->plane_y = -0.66;
+	}
+	else if (!flag)
+	{
+		data->ray->dir_x = 0;
+		data->ray->dir_y = 1;
+		data->ray->plane_x = -0.66;
+		data->ray->plane_y = 0;
+	}
+}
+
 int	init_player_pos(char *str, int y, t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if ((str[i] == 'N' || str[i] == 'W' || str[i] == 'E'
 				|| str[i] == 'S') && !data->player)
 		{
-			data->ray->pos_x = i;
-			data->ray->pos_y = y;
 			if (str[i] == 'N')
-			{
-				data->ray->dir_x = 0;
-				data->ray->dir_y = -1;
-				data->ray->plane_x = 0.66;
-				data->ray->plane_y = 0;
-			}
+				init_pos_nw(data, 1, i, y);
 			else if (str[i] == 'W')
-			{
-				data->ray->dir_x = -1;
-				data->ray->dir_y = 0;
-				data->ray->plane_x = 0;
-				data->ray->plane_y = 0.66;
-			}
+				init_pos_nw(data, 0, i, y);
 			else if (str[i] == 'E')
-			{
-				data->ray->dir_x = 1;
-				data->ray->dir_y = 0;
-				data->ray->plane_x = 0;
-				data->ray->plane_y = -0.66;
-			}
+				init_pos_se(data, 1, i, y);
 			else if (str[i] == 'S')
-			{
-				data->ray->dir_x = 0;
-				data->ray->dir_y = 1;
-				data->ray->plane_x = -0.66;
-				data->ray->plane_y = 0;
-			}
+				init_pos_se(data, 0, i, y);
 			data->player++;
 			return (EXIT_SUCCESS);
 		}
 		else if ((str[i] == 'N' || str[i] == 'W' || str[i] == 'E'
 				|| str[i] == 'S') && data->player)
 			return (EXIT_FAILURE);
-		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -101,6 +118,5 @@ void	init_ray_cast(t_ray *ray)
 	ray->step_tex = 0;
 	ray->tex_pos = 0;
 	ray->tex_x = 0;
-	// ray->tex_y = 0;
 	ray->wall_x = 0;
 }

@@ -54,7 +54,7 @@ int	check_elements_map(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	count_map_elements(t_data *data) // OK - a voir si faite par JLO
+int	count_map_elements(t_data *data)
 {
 	int	x;
 	int	y;
@@ -79,7 +79,7 @@ int	count_map_elements(t_data *data) // OK - a voir si faite par JLO
 	return (EXIT_SUCCESS);
 }
 
-int	parsing_textures(t_data *data) // si espace ou tab ?
+int	parsing_textures(t_data *data)
 {
 	int	i;
 

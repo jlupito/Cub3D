@@ -83,6 +83,9 @@ typedef struct s_data {
 /********** HOOKS ***********/
 int		handle_keypress(int keysym, t_data *data);
 int		handle_buttonpress(t_data *data);
+void	move_side(t_data *data, int flag);
+void	move_front(t_data *data, int flag);
+void	rotate(t_data *data, int flag);
 
 /************************ INIT *************************/
 int		save_data(char *infile, t_data *data, int flag);
@@ -90,6 +93,8 @@ int		init_data(t_data *data);
 int		init_player_pos(char *str, int y, t_data *data);
 void	init_ray_cast(t_ray *ray);
 int		check_args(int ac, char **av);
+void	init_pos_nw(t_data *data, int flag, int i, int y);
+void	init_pos_se(t_data *data, int flag, int i, int y);
 
 /************************  MAP  *************************/
 int		fill_colors(char *str, t_data *data);
@@ -132,6 +137,7 @@ void	step_side_dist(t_ray *ray);
 void	prep_drawing(t_ray *ray);
 void	perform_dda(t_ray *ray, t_data *data);
 void	calc_texture(t_ray *ray);
+int		text_init(t_data *data, int i);
 int		game_init(t_data *data);
 int		game_loop(t_data *data);
 
