@@ -10,8 +10,32 @@ int	handle_keypress(int keysym, t_data *data)
 		exit (0);
 	}
 	if (keysym == XK_Right)
+		rotate(data, 1);
+	if (keysym == XK_Left)
+		rotate(data, 0);
+	if (keysym == XK_w)
+		move_front(data, 1);
+	if (keysym == XK_s)
+		move_front(data, 0);
+	if (keysym == XK_d)
+		move_side(data, 1);
+	if (keysym == XK_a)
+		move_side(data, 0);
+	return (0);
+}
+
+int	handle_buttonpress(t_data *data)
+{
+	free_all(data);
+	close_all(data);
+	exit (0);
+}
+
+void	rotate(t_data *data, int flag)
+{
+	data->ray->old_dir_x = data->ray->dir_x;
+	if (flag)
 	{
-		data->ray->old_dir_x = data->ray->dir_x;
 		data->ray->dir_x = (data->ray->dir_x * cos(ROTSPEED)) - \
 			(data->ray->dir_y * sin(ROTSPEED));
 		data->ray->dir_y = (data->ray->old_dir_x * sin(ROTSPEED)) + \
@@ -22,9 +46,8 @@ int	handle_keypress(int keysym, t_data *data)
 		data->ray->plane_y = (data->ray->old_plane_x * sin(ROTSPEED)) + \
 			(data->ray->plane_y * cos(ROTSPEED));
 	}
-	if (keysym == XK_Left)
+	if (!flag)
 	{
-		data->ray->old_dir_x = data->ray->dir_x;
 		data->ray->dir_x = (data->ray->dir_x * cos(-ROTSPEED)) - \
 			(data->ray->dir_y * sin(-ROTSPEED));
 		data->ray->dir_y = (data->ray->old_dir_x * sin(-ROTSPEED)) + \
@@ -35,12 +58,12 @@ int	handle_keypress(int keysym, t_data *data)
 		data->ray->plane_y = (data->ray->old_plane_x * sin(-ROTSPEED)) + \
 			(data->ray->plane_y * cos(-ROTSPEED));
 	}
-	if (keysym == XK_w)
+}
+
+void	move_front(t_data *data, int flag)
+{
+	if (flag)
 	{
-		// printf("pos_x dans w [%d]\n", data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
-		// 		+ data->ray->dir_x * MOVESPEED)]);
-		// printf("pos_y dans w [%d]\n", data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
-		// 		* MOVESPEED)][(int)(data->ray->pos_x)]);
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				+ data->ray->dir_x * MOVESPEED)] != 1)
 			data->ray->pos_x += data->ray->dir_x * MOVESPEED;
@@ -48,12 +71,8 @@ int	handle_keypress(int keysym, t_data *data)
 				* MOVESPEED)][(int)(data->ray->pos_x)] != 1)
 			data->ray->pos_y += data->ray->dir_y * MOVESPEED;
 	}
-	if (keysym == XK_s)
+	if (!flag)
 	{
-		// printf("pos_x dans s [%d]\n", data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
-		// 		- data->ray->dir_x * MOVESPEED)]);
-		// printf("pos_y dans s [%d]\n", data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
-		// 		* MOVESPEED)][(int)(data->ray->pos_x)]);
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				- data->ray->dir_x * MOVESPEED)] != 1)
 			data->ray->pos_x -= data->ray->dir_x * MOVESPEED;
@@ -61,7 +80,11 @@ int	handle_keypress(int keysym, t_data *data)
 				* MOVESPEED)][(int)(data->ray->pos_x)] != 1)
 			data->ray->pos_y -= data->ray->dir_y * MOVESPEED;
 	}
-	if (keysym == XK_d)
+}
+
+void	move_side(t_data *data, int flag)
+{
+	if (flag)
 	{
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				+ data->ray->plane_x * MOVESPEED)] != 1)
@@ -70,7 +93,7 @@ int	handle_keypress(int keysym, t_data *data)
 				* MOVESPEED)][(int)(data->ray->pos_x)] != 1)
 			data->ray->pos_y += data->ray->plane_y * MOVESPEED;
 	}
-	if (keysym == XK_a)
+	if (!flag)
 	{
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				- data->ray->plane_x * MOVESPEED)] != 1)
@@ -79,12 +102,4 @@ int	handle_keypress(int keysym, t_data *data)
 				* MOVESPEED)][(int)(data->ray->pos_x)] != 1)
 			data->ray->pos_y -= data->ray->plane_y * MOVESPEED;
 	}
-	return (0);
-}
-
-int	handle_buttonpress(t_data *data)
-{
-	free_all(data);
-	close_all(data);
-	exit (0);
 }

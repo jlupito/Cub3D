@@ -47,8 +47,8 @@ int	is_nothing(char c)
 
 bool	test_path_texture(char *path_texture)
 {
-	char *path;
-	int i;
+	char	*path;
+	int		i;
 
 	if (!path_texture || !*path_texture)
 		return (false);

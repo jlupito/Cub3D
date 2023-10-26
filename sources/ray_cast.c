@@ -23,7 +23,6 @@ void	ray_throw(t_ray *ray, int x)
 void	step_side_dist(t_ray *ray)
 {
 	ray->hit = 0;
-	ray->side = 0;
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -48,7 +47,6 @@ void	step_side_dist(t_ray *ray)
 		ray->side_dist_y = (ray->map_y + 1.0 - ray->pos_y)
 			* ray->delta_dist_y;
 	}
-	// printf("ray->side_dist_x [%f] ray->side_dist_y [%f]\n", ray->side_dist_x, ray->side_dist_y);
 }
 
 void	perform_dda(t_ray *ray, t_data *data)
@@ -67,7 +65,6 @@ void	perform_dda(t_ray *ray, t_data *data)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		// ray->hit = (data->map_char[ray->map_x][ray->map_y] == '1');
 		if (ray->map_x < 0.25 || ray->map_y < 0.25
 			|| data->map_char[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
@@ -89,15 +86,14 @@ void	prep_drawing(t_ray *ray)
 	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
-	// printf("ray->draw_end [%d]\n", ray->draw_end);
 	if (ray->side == 1 && ray->ray_dir_y < 0)
-		ray->tex_img = 1; // NORTH
+		ray->tex_img = 1;
 	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		ray->tex_img = 2; // SOUTH
+		ray->tex_img = 2;
 	else if (ray->side == 0 && ray->ray_dir_x < 0)
-		ray->tex_img = 3; // WEST
+		ray->tex_img = 3;
 	else if (ray->side == 0 && ray->ray_dir_x > 0)
-		ray->tex_img = 4; // EAST
+		ray->tex_img = 4;
 }
 
 void	calc_texture(t_ray *ray)
