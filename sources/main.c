@@ -11,7 +11,7 @@ int	game_loop(t_data *data)
 	return (0);
 }
 
-int	game_init(t_data *data)
+int	game_init(t_data *data)  // AJout des protections sur la MLX
 {
 	int	i;
 
@@ -26,13 +26,24 @@ int	game_init(t_data *data)
 	while (++i < 5)
 	{
 		if (i == 0)
+		{
 			data->img[i].img_ptr = mlx_new_image(data->mlx_ptr,
 					WIN_WIDTH, WIN_HEIGHT);
+			if (!data->img[i].img_ptr)
+				return (free(data->mlx_ptr), EXIT_FAILURE);
+		}
 		else
-			data->img[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
-					data->img[i].path, &data->img[i].width, &data->img[i].height);
+		{
+			data->img[i].img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->img[i].path, &data->img[i].width, &data->img[i].height);
+			if (!data->img[i].img_ptr)
+			{
+				while (i-- >= 0)
+					free(data->img[i].img_ptr);
+				return (free(data->mlx_ptr), EXIT_FAILURE); // autres images ? a free ? LEAK.
+			}
+		}
 		data->img[i].addr = mlx_get_data_addr(data->img[i].img_ptr,
-				&data->img[i].bpp, &data->img[i].line_len, &data->img[i].endian);
+			&data->img[i].bpp, &data->img[i].line_len, &data->img[i].endian);
 		// printf("img.height [%d]\n", data->img[i].height);
 	}
 	return (0);

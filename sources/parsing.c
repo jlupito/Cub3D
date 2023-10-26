@@ -83,18 +83,14 @@ int	parsing_textures(t_data *data) // si espace ou tab ?
 {
 	int	i;
 
-	i = 0;
-	while (++i < 5)
+	i = 1;
+	while (i < 5)
 	{
 		if (!(data->img[i].path))
 			return (EXIT_FAILURE);
-		if (ft_strncmp(data->img[i].path, "NO ./", 5)
-			|| ft_strncmp(data->img[i].path, "SO ./", 5)
-			|| ft_strncmp(data->img[i].path, "WE ./", 5)
-			|| ft_strncmp(data->img[i].path, "EA ./", 5))
+		if (test_path_texture(data->img[i].path) == false)
 			return (EXIT_FAILURE);
-		if (!test_path_texture(data->img[i].path))
-			return (EXIT_FAILURE);
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -109,7 +105,9 @@ int	parsing(t_data *data)
 		return (ft_error("---UNAPPROVED MAP COMPONENT---\n"), EXIT_FAILURE);
 	if (count_map_elements(data))
 		return (ft_error("---WRONG NUMBER OF PLAYERS---\n"), EXIT_FAILURE);
-	if (/*parsing_textures(data) || */parsing_colors(data))
-		return (ft_error("---ERROR IN TEXTURES & COLORS---\n"), EXIT_FAILURE);
+	if (parsing_textures(data))
+		return (ft_error("---ERROR IN TEXTURES---\n"), EXIT_FAILURE);
+	if (parsing_colors(data))
+		return (ft_error("---ERROR IN COLORS---\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

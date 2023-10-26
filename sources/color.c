@@ -16,7 +16,7 @@ int	get_int_color(int rgb[3])
 	return (color);
 }
 
-int	parsing_colors(t_data *data)  // TEST si on entre autre chose que int (demi parsing ?)
+int	parsing_colors(t_data *data)
 {
 	int	i;
 
@@ -25,7 +25,8 @@ int	parsing_colors(t_data *data)  // TEST si on entre autre chose que int (demi 
 	i = -1;
 	while (++i < 3)
 	{
-		if ((data->rgb_ceiling[i] < 0) || (data->rgb_floor[i] < 0)
+		if ((!data->rgb_ceiling[i]) || (!data->rgb_floor[i])
+			|| (data->rgb_ceiling[i] < 0) || (data->rgb_floor[i] < 0)
 			|| (data->rgb_ceiling[i]) > 255 || (data->rgb_floor[i] > 255))
 			return (EXIT_FAILURE);
 	}
