@@ -1,11 +1,6 @@
 NO ./textures/blue_wall.xpm
-<<<<<<< HEAD
 SO ./textures/red_wall.xpm
 WE ./textures/wood_wall.xpm
-=======
-SO ./textures/wood_wall.xpm
-WE ./textures/red_wall.xpm
->>>>>>> refs/remotes/origin/main
 EA ./textures/yellow_wall.xpm
 
 C 25,25, 52

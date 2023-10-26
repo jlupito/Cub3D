@@ -37,10 +37,10 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	if (keysym == XK_w)
 	{
-		printf("pos_x dans w [%d]\n", data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
-				+ data->ray->dir_x * MOVESPEED)]);
-		printf("pos_y dans w [%d]\n", data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
-				* MOVESPEED)][(int)(data->ray->pos_x)]);
+		// printf("pos_x dans w [%d]\n", data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
+		// 		+ data->ray->dir_x * MOVESPEED)]);
+		// printf("pos_y dans w [%d]\n", data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
+		// 		* MOVESPEED)][(int)(data->ray->pos_x)]);
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				+ data->ray->dir_x * MOVESPEED)] != 1)
 			data->ray->pos_x += data->ray->dir_x * MOVESPEED;
@@ -50,10 +50,10 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	if (keysym == XK_s)
 	{
-		printf("pos_x dans s [%d]\n", data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
-				- data->ray->dir_x * MOVESPEED)]);
-		printf("pos_y dans s [%d]\n", data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
-				* MOVESPEED)][(int)(data->ray->pos_x)]);
+		// printf("pos_x dans s [%d]\n", data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
+		// 		- data->ray->dir_x * MOVESPEED)]);
+		// printf("pos_y dans s [%d]\n", data->map_char[(int)(data->ray->pos_y + data->ray->dir_y
+		// 		* MOVESPEED)][(int)(data->ray->pos_x)]);
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
 				- data->ray->dir_x * MOVESPEED)] != 1)
 			data->ray->pos_x -= data->ray->dir_x * MOVESPEED;

@@ -3,10 +3,10 @@
 
 int	game_loop(t_data *data)
 {
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
-	mlx_hook(data->win_ptr, 17, 0, handle_buttonpress, data);
 	render(data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
+	mlx_hook(data->win_ptr, 17, 0, handle_buttonpress, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
@@ -22,7 +22,6 @@ int	game_init(t_data *data)  // AJout des protections sur la MLX
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!data->win_ptr)
 		return (free(data->mlx_ptr), EXIT_FAILURE);
-	// printf("pos x: %f, pos y : %f\n", data->ray->pos_x, data->ray->pos_y);
 	while (++i < 5)
 	{
 		if (i == 0)
@@ -44,7 +43,6 @@ int	game_init(t_data *data)  // AJout des protections sur la MLX
 		}
 		data->img[i].addr = mlx_get_data_addr(data->img[i].img_ptr,
 			&data->img[i].bpp, &data->img[i].line_len, &data->img[i].endian);
-		// printf("img.height [%d]\n", data->img[i].height);
 	}
 	return (0);
 }

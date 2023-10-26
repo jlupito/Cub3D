@@ -23,6 +23,7 @@ void	ray_throw(t_ray *ray, int x)
 void	step_side_dist(t_ray *ray)
 {
 	ray->hit = 0;
+	ray->side = 0;
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -66,7 +67,7 @@ void	perform_dda(t_ray *ray, t_data *data)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		// ray->hit = (data->map_char[ray->map_y][ray->map_x] == '1');
+		// ray->hit = (data->map_char[ray->map_x][ray->map_y] == '1');
 		if (ray->map_x < 0.25 || ray->map_y < 0.25
 			|| data->map_char[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
@@ -102,11 +103,11 @@ void	prep_drawing(t_ray *ray)
 void	calc_texture(t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->wall_x = ray->pos_y + (ray->perp_wall_dist * ray->dir_y);
+		ray->wall_x = ray->pos_y + (ray->perp_wall_dist * ray->ray_dir_y);
 	else
-		ray->wall_x = ray->pos_x + (ray->perp_wall_dist * ray->dir_x);
+		ray->wall_x = ray->pos_x + (ray->perp_wall_dist * ray->ray_dir_x);
 	ray->wall_x -= floor(ray->wall_x);
-	ray->tex_x = (int)(ray->wall_x * (double)TEX_WIDTH);
+	ray->tex_x = (ray->wall_x * TEX_WIDTH);
 	if ((ray->side == 0 && ray->dir_x > 0)
 		|| (ray->side == 1 && ray->dir_y < 0))
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
