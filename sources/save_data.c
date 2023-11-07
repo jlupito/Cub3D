@@ -1,11 +1,6 @@
 
 #include <../includes/cub3d.h>
 
-// int	save_line(t_data *data, char *line)
-// {
-
-// }
-
 int	save_data(char *infile, t_data *data, int flag)
 {
 	int		fd;
@@ -19,7 +14,7 @@ int	save_data(char *infile, t_data *data, int flag)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[0] == 'F' || line[0] == 'C')
+		if (line[0] == 'F' || line[0] == 'C') // Floors and ceilings
 		{
 			if (text_colors_filled(data))
 			{
@@ -27,7 +22,7 @@ int	save_data(char *infile, t_data *data, int flag)
 					return (free(line), 1);
 			}
 		}
-		else if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "EA", 2)
+		else if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "EA", 2) // Textures
 			|| !ft_strncmp(line, "SO", 2) || !ft_strncmp(line, "WE", 2))
 		{
 			if (text_colors_filled(data))
@@ -36,15 +31,16 @@ int	save_data(char *infile, t_data *data, int flag)
 					return (free(line), 1);
 			}
 		}
-		else if (!text_colors_filled(data) && line[0] != '\n')
+		else if (!text_colors_filled(data) && line[0] != '\n' && line != NULL) // Map_char
 		{
+			printf("map fausse mais on y va quand meme ...!\n");
 			if (flag)
 			{
 				if (fill_map(line, data, i))
 					return (free(line), 1);
 			}
-			if (!flag)
-				return (ft_error("---MISSING MAP ARGUMENTS---\n"), free(line), 1);
+			// if (!flag)
+			// 	return (ft_error("---MISSING MAP ARGUMENTS---\n"), free(line), 1);
 			i++;
 		}
 		(free(line), line = get_next_line(fd));

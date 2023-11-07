@@ -6,7 +6,7 @@ int	init_data(t_data *data)
 
 	data->nb_line = 0;
 	data->player = 0;
-	data->map_char = NULL; // test
+	data->map_char = NULL;
 	data->rgb_ceiling = ft_calloc(4, sizeof(int));
 	if (!data->rgb_ceiling)
 		return (EXIT_FAILURE);

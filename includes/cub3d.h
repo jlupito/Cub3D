@@ -123,6 +123,8 @@ int		len_tab(char **tab);
 int		is_nothing(char c);
 bool	test_path_texture(char *code_texture);
 
+bool is_empty(char *str);
+
 /*********************** ERRORS ************************/
 void	ft_error(char *message);
 

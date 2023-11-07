@@ -60,7 +60,7 @@ void	rotate(t_data *data, int flag)
 	}
 }
 
-void	move_front(t_data *data, int flag)
+void	move_front(t_data *data, int flag) // test avec le 1 et le '1'.
 {
 	if (flag)
 	{
@@ -82,24 +82,24 @@ void	move_front(t_data *data, int flag)
 	}
 }
 
-void	move_side(t_data *data, int flag)
+void	move_side(t_data *data, int flag) // test avec le 1 et le '1'.
 {
 	if (flag)
 	{
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
-				+ data->ray->plane_x * MOVESPEED)] != 1)
+				+ data->ray->plane_x * MOVESPEED)] != '1')
 			data->ray->pos_x += data->ray->plane_x * MOVESPEED;
 		if (data->map_char[(int)(data->ray->pos_y + data->ray->plane_y
-				* MOVESPEED)][(int)(data->ray->pos_x)] != 1)
+				* MOVESPEED)][(int)(data->ray->pos_x)] != '1')
 			data->ray->pos_y += data->ray->plane_y * MOVESPEED;
 	}
 	if (!flag)
 	{
 		if (data->map_char[(int)(data->ray->pos_y)][(int)(data->ray->pos_x
-				- data->ray->plane_x * MOVESPEED)] != 1)
+				- data->ray->plane_x * MOVESPEED)] != '1')
 			data->ray->pos_x -= data->ray->plane_x * MOVESPEED;
 		if (data->map_char[(int)(data->ray->pos_y + data->ray->plane_y
-				* MOVESPEED)][(int)(data->ray->pos_x)] != 1)
+				* MOVESPEED)][(int)(data->ray->pos_x)] != '1')
 			data->ray->pos_y -= data->ray->plane_y * MOVESPEED;
 	}
 }

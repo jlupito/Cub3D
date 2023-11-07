@@ -23,16 +23,16 @@ int	fill_map(char *str, t_data *data, int i)
 	{
 		data->map_char = malloc(sizeof(char *) * (data->nb_line + 1));
 		if (!data->map_char)
-			return (1);
+			return (EXIT_FAILURE);
 	}
 	data->map_char[i] = ft_strdup(str);
 	if (!data->map_char[i])
-		return (1);
+		return (EXIT_FAILURE);
 	if (init_player_pos(data->map_char[i], i, data))
-		return (1);
+		return (EXIT_FAILURE);
 	if (i == (data->nb_line - 1))
 		data->map_char[i + 1] = NULL;
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	fill_colors(char *str, t_data *data)
@@ -49,6 +49,8 @@ int	fill_colors(char *str, t_data *data)
 	if (!tmp)
 		return (free_tabs(tmp), 1);
 	i = -1;
+	if (len_tab(tmp) != 3)
+		return (ft_error("---ERROR IN COLORS---\n"), free_tabs(tmp), 1);
 	while (++i < 3)
 	{
 		if (flag)
@@ -90,5 +92,5 @@ int	fill_text(char *str, t_data *data)
 			str++;
 		data->img[4].path = ft_strdup_trim(str);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

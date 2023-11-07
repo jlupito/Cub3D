@@ -46,7 +46,6 @@ int	game_init(t_data *data)
 
 int	game_loop(t_data *data)
 {
-	printf("tu passes la?\n");
 	render(data);
 	mlx_loop_hook(data->mlx_ptr, &render, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
