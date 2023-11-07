@@ -43,7 +43,6 @@ int	render(t_data *data)
 		prep_drawing(data->ray);
 		draw_verti(data, x);
 		x++;
-		printf("x: %d, width: %d\n", x, WIN_WIDTH);
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img[0].img_ptr, 0, 0);

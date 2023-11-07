@@ -21,7 +21,7 @@ int	fill_map(char *str, t_data *data, int i)
 {
 	if (i == 0)
 	{
-		data->map_char = malloc(sizeof(char *) * (data->nb_line + 1));
+		data->map_char = malloc(sizeof(char *) * (data->line_map + 1));
 		if (!data->map_char)
 			return (EXIT_FAILURE);
 	}
@@ -30,9 +30,17 @@ int	fill_map(char *str, t_data *data, int i)
 		return (EXIT_FAILURE);
 	if (init_player_pos(data->map_char[i], i, data))
 		return (EXIT_FAILURE);
-	if (i == (data->nb_line - 1))
+	if (i == (data->line_map - 1))
 		data->map_char[i + 1] = NULL;
 	return (EXIT_SUCCESS);
+}
+
+static void	fill_cf_colors(int flag, int i, t_data *data, char **tmp)
+{
+	if (flag)
+		data->rgb_floor[i] = ft_atoi(tmp[i]);
+	else
+		data->rgb_ceiling[i] = ft_atoi(tmp[i]);
 }
 
 int	fill_colors(char *str, t_data *data)
@@ -52,12 +60,7 @@ int	fill_colors(char *str, t_data *data)
 	if (len_tab(tmp) != 3)
 		return (ft_error("---ERROR IN COLORS---\n"), free_tabs(tmp), 1);
 	while (++i < 3)
-	{
-		if (flag)
-			data->rgb_floor[i] = ft_atoi(tmp[i]);
-		else
-			data->rgb_ceiling[i] = ft_atoi(tmp[i]);
-	}
+		fill_cf_colors(flag, i, data, tmp);
 	if (flag)
 		data->rgb_floor[3] = 1;
 	else

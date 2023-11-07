@@ -40,7 +40,6 @@ int	check_elements_map(t_data *data)
 		x = -1;
 		while (data->map_char[y][++x])
 		{
-			// printf("%c", data->map_char[y][x]);
 			if ((data->map_char[y][x] != 'N')
 				&& (data->map_char[y][x] != 'S')
 				&& (data->map_char[y][x] != 'E')
@@ -68,7 +67,6 @@ int	count_map_elements(t_data *data)
 		x = -1;
 		while (data->map_char[y][++x])
 		{
-			// printf("Ligne vaut %s\n", data->map_char[y]);
 			if ((data->map_char[y][x] == 'N')
 				|| (data->map_char[y][x] == 'S')
 				|| (data->map_char[y][x] == 'E')
@@ -101,10 +99,10 @@ int	parsing(t_data *data)
 {
 	if (check_empty_line(data))
 		return (ft_error("---MAP HAS EMPTY LINE---\n"), EXIT_FAILURE);
-	if (check_closed_map(data))
-		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);
 	if (check_elements_map(data))
 		return (ft_error("---WRONG MAP---\n"), EXIT_FAILURE);
+	if (check_closed_map(data))
+		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);
 	if (count_map_elements(data))
 		return (ft_error("---WRONG NUMBER OF PLAYERS---\n"), EXIT_FAILURE);
 	if (parsing_textures(data))

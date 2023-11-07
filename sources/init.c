@@ -4,8 +4,10 @@ int	init_data(t_data *data)
 {
 	int	i;
 
-	data->nb_line = 0;
+	data->line_map = 0;
+	data->index_map = 0;
 	data->player = 0;
+	data->flag_pars = 0;
 	data->map_char = NULL;
 	data->rgb_ceiling = ft_calloc(4, sizeof(int));
 	if (!data->rgb_ceiling)

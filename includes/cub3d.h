@@ -53,7 +53,6 @@ typedef struct s_ray {
 	double	step_tex;
 	double	tex_pos;
 	int		tex_x;
-	// int		tex_y;
 	double	wall_x;
 }				t_ray;
 
@@ -69,17 +68,19 @@ typedef struct s_img {
 }				t_img;
 
 typedef struct s_data {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		img[5];
-	t_ray		*ray;
-	int			player;
-	char		**map_char;
-	int			empty_line;
-	int			nb_line;
-	int			*rgb_ceiling;
-	int			*rgb_floor;
-}					t_data;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img[5];
+	t_ray	*ray;
+	int		player;
+	char	**map_char;
+	int		empty_line;
+	int		line_map;
+	int		index_map;
+	int		*rgb_ceiling;
+	int		*rgb_floor;
+	int		flag_pars;
+}				t_data;
 
 /********** HOOKS ***********/
 int		handle_keypress(int keysym, t_data *data);
@@ -89,7 +90,7 @@ void	move_front(t_data *data, int flag);
 void	rotate(t_data *data, int flag);
 
 /************************ INIT *************************/
-int		save_data(char *infile, t_data *data, int flag);
+int		save_data(char *infile, t_data *data);
 int		init_data(t_data *data);
 int		init_player_pos(char *str, int y, t_data *data);
 void	init_ray_cast(t_ray *ray);
@@ -104,6 +105,7 @@ int		text_colors_filled(t_data *data);
 int		colors_filled(t_data *data);
 int		text_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
+int		save_map(char *infile, t_data *data);
 
 /************************PARSING*************************/
 int		parsing(t_data *data);
