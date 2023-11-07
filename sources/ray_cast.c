@@ -104,8 +104,8 @@ void	calc_texture(t_ray *ray)
 		ray->wall_x = ray->pos_x + (ray->perp_wall_dist * ray->ray_dir_x);
 	ray->wall_x -= floor(ray->wall_x);
 	ray->tex_x = (ray->wall_x * TEX_WIDTH);
-	if ((ray->side == 0 && ray->dir_x > 0)
-		|| (ray->side == 1 && ray->dir_y < 0))
+	if ((ray->side == 0 && ray->ray_dir_x > 0)
+		|| (ray->side == 1 && ray->ray_dir_y < 0))
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 	ray->step_tex = TEX_HEIGHT * 1.0 / ray->line_height;
 	ray->tex_pos = (ray->draw_start - (WIN_HEIGHT / 2) \
