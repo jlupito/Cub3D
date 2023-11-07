@@ -104,7 +104,7 @@ int	parsing(t_data *data)
 	if (check_closed_map(data))
 		return (ft_error("---MAP IS NOT CLOSED---\n"), EXIT_FAILURE);
 	if (check_elements_map(data))
-		return (ft_error("---UNAPPROVED MAP COMPONENT---\n"), EXIT_FAILURE);
+		return (ft_error("---WRONG MAP---\n"), EXIT_FAILURE);
 	if (count_map_elements(data))
 		return (ft_error("---WRONG NUMBER OF PLAYERS---\n"), EXIT_FAILURE);
 	if (parsing_textures(data))

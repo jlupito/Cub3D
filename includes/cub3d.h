@@ -101,6 +101,8 @@ void	init_pos_se(t_data *data, int flag, int i, int y);
 int		fill_colors(char *str, t_data *data);
 int		fill_text(char *str, t_data *data);
 int		text_colors_filled(t_data *data);
+int		colors_filled(t_data *data);
+int		text_filled(t_data *data);
 int		fill_map(char *str, t_data *data, int i);
 
 /************************PARSING*************************/
@@ -122,8 +124,7 @@ void	print_map(t_data *data);
 int		len_tab(char **tab);
 int		is_nothing(char c);
 bool	test_path_texture(char *code_texture);
-
-bool is_empty(char *str);
+bool	is_empty(char *str);
 
 /*********************** ERRORS ************************/
 void	ft_error(char *message);
