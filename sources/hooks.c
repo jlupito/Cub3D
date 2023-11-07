@@ -10,9 +10,9 @@ int	handle_keypress(int keysym, t_data *data)
 		exit (0);
 	}
 	if (keysym == XK_Right)
-		rotate(data, 1);
-	if (keysym == XK_Left)
 		rotate(data, 0);
+	if (keysym == XK_Left)
+		rotate(data, 1);
 	if (keysym == XK_w)
 		move_front(data, 1);
 	if (keysym == XK_s)

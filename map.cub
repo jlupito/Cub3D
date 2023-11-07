@@ -3,7 +3,7 @@ SO ./textures/text2.xpm
 WE ./textures/text3.xpm
 EA ./textures/text4.xpm
 
-C 25,25, 250
+C 25,25,250
 F 251,245,220
 
   111111111111
