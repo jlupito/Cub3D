@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:26:39 by jarthaud          #+#    #+#             */
-/*   Updated: 2022/11/23 15:02:06 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:34:08 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	ft_isdigit(int c)
 {
-	if (c < 48 || c > 57)
+	if (c >= 48 && c <= 57)
+	{
+		printf("le char est : %d\n", c);
 		return (0);
+	}
 	else
 		return (2048);
 }

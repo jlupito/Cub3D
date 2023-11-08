@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:02 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:46:05 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:35:28 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,31 @@ int	fill_map(char *str, t_data *data, int i)
 	return (EXIT_SUCCESS);
 }
 
-void	fill_cf_colors(int flag, int i, t_data *data, char **tmp)
+int	fill_cf_colors(int flag, int i, t_data *data, char **tmp)
 {
+	int	x;
+	int	y;
+
+	y = 0;
+	x = 0;
+	while (tmp[y])
+	{
+		while (tmp[y][x])
+		{
+			if (ft_isdigit((int)tmp[y][x]))
+			{
+				printf("tu sors avec tmp: %c\n", tmp[y][x]);
+				return (1);
+			}
+			x++;
+		}
+		y++;
+	}
 	if (flag)
 		data->rgb_floor[i] = ft_atoi(tmp[i]);
 	else
 		data->rgb_ceiling[i] = ft_atoi(tmp[i]);
+	return (0);
 }
 
 int	fill_colors(char *str, t_data *data)
@@ -64,6 +83,8 @@ int	fill_colors(char *str, t_data *data)
 	if (str[0] == 'F')
 		flag = 1;
 	str++;
+	while (ft_isspace(*str))
+		str++;
 	tmp = ft_split(str, ',');
 	if (!tmp)
 		return (free_tabs(tmp), 1);
@@ -71,7 +92,10 @@ int	fill_colors(char *str, t_data *data)
 	if (len_tab(tmp) != 3)
 		return (free_tabs(tmp), 1);
 	while (++i < 3)
-		fill_cf_colors(flag, i, data, tmp);
+	{
+		if (fill_cf_colors(flag, i, data, tmp))
+			return (free_tabs(tmp), 1);
+	}
 	if (flag)
 		data->rgb_floor[3] = 1;
 	else

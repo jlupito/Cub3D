@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:32 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:46:33 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:35:45 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parsing_colors(t_data *data)
 	i = -1;
 	while (++i < 3)
 	{
-		if ((!data->rgb_ceiling[i]) || (!data->rgb_floor[i])
+		if ((!data->rgb_ceiling[3]) || (!data->rgb_floor[3])
 			|| (data->rgb_ceiling[i] < 0) || (data->rgb_floor[i] < 0)
 			|| (data->rgb_ceiling[i]) > 255 || (data->rgb_floor[i] > 255))
 			return (EXIT_FAILURE);

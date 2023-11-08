@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:52 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:47:54 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:25:41 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,12 @@ int	len_tab(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+
+int	ft_isspace(int c)
+{
+	if ((c >= 9 && c <= 13) || c == ' ')
+		return (c);
+	else
+		return (0);
 }

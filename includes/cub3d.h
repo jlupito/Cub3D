@@ -20,8 +20,8 @@
 # define WIN_HEIGHT 480
 # define TEX_WIDTH 100
 # define TEX_HEIGHT 100
-# define ROTSPEED 0.05
-# define MOVESPEED 0.05
+# define ROTSPEED 0.08
+# define MOVESPEED 0.08
 
 typedef struct s_ray {
 	double	pos_x;
@@ -122,11 +122,12 @@ void	free_tabs(char **tab);
 void	free_all(t_data *data);
 void	free_all2(t_data *data);
 void	close_all(t_data *data);
-void	print_map(t_data *data);
 int		len_tab(char **tab);
 int		is_nothing(char c);
 bool	test_path_texture(char *code_texture);
 bool	is_empty(char *str);
+int		ft_isspace(int c);
+
 
 /*********************** ERRORS ************************/
 void	ft_error(char *message);

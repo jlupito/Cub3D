@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:13 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:47:14 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:32:03 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool	test_path_texture(char *path_texture)
 		i++;
 	}
 	path[i] = '\0';
-	if (access(path, F_OK) == -1)
+	if ((access(path, F_OK) == -1) || (access(path, R_OK) == -1))
 		return (free(path), false);
 	else
 		return (free(path), true);

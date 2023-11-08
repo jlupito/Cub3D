@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:20 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:47:21 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:10:58 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_closed_map(t_data *data)
 		x = -1;
 		while (data->map_char[y][++x])
 		{
-			if (data->map_char[y][x] == '0')
+			if (data->map_char[y][x] == '0' )
 			{
 				if ((is_nothing(data->map_char[y - 1][x]))
 				|| (is_nothing(data->map_char[y + 1][x]))
