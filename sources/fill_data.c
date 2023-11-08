@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:02 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 16:53:12 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:08:51 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	fill_cf_colors(int flag, int i, t_data *data, char *tmp)
 	return (0);
 }
 
+
 int	fill_colors(char *str, t_data *data)
 {
 	char	**tmp;
@@ -61,11 +62,9 @@ int	fill_colors(char *str, t_data *data)
 	while (ft_isspace(*str))
 		str++;
 	tmp = ft_split(str, ',');
-	if (!tmp)
+	if (!tmp || (len_tab(tmp) != 3))
 		return (free_tabs(tmp), 1);
 	i = -1;
-	if (len_tab(tmp) != 3)
-		return (free_tabs(tmp), 1);
 	while (++i < 3)
 	{
 		if (fill_cf_colors(flag, i, data, tmp[i]))
@@ -80,33 +79,27 @@ int	fill_colors(char *str, t_data *data)
 
 int	fill_text(char *str, t_data *data)
 {
+	int	flag;
+
+	flag = 0;
 	if (!ft_strncmp(str, "NO", 2))
-	{
-		str = str + 2;
-		while (*str && ft_isspace(*str))
-			str++;
-		data->img[1].path = ft_strdup_trim(str);
-	}
+		flag = 1;
 	else if (!ft_strncmp(str, "SO", 2))
-	{
-		str = str + 2;
-		while (*str && *str != '.')
-			str++;
-		data->img[2].path = ft_strdup_trim(str);
-	}
+		flag = 2;
 	else if (!ft_strncmp(str, "WE", 2))
-	{
-		str = str + 2;
-		while (*str && *str != '.')
-			str++;
-		data->img[3].path = ft_strdup_trim(str);
-	}
+		flag = 3;
 	else if (!ft_strncmp(str, "EA", 2))
-	{
-		str = str + 2;
-		while (*str && *str != '.')
-			str++;
+		flag = 4;
+	str = str + 2;
+	while (*str && ft_isspace(*str))
+		str++;
+	if (flag == 1)
+		data->img[1].path = ft_strdup_trim(str);
+	else if (flag == 2)
+		data->img[2].path = ft_strdup_trim(str);
+	else if (flag == 3)
+		data->img[3].path = ft_strdup_trim(str);
+	else if (flag == 4)
 		data->img[4].path = ft_strdup_trim(str);
-	}
 	return (EXIT_SUCCESS);
 }
