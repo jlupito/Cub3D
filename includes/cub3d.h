@@ -28,25 +28,25 @@ typedef struct s_ray {
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
-	double	plane_x; //vecteur du plan (commence à 0.66 pour E, -0.66 pour W, 0 sinon)
-	double	plane_y; //vecteur du plan (commence à 0.66 pour N, -0.66 pour S, 0 sinon)
-	double	ray_dir_x; //calcul de direction x du rayon
-	double	ray_dir_y; //calcul de direction y du rayon
-	double	camera_x; //point x sur la plan camera : Gauche ecran = -1, milieu = 0, droite = 1
-	int		map_x; // coordonée x du carré dans lequel est pos
-	int		map_y; // coordonnée y du carré dans lequel est pos
-	double	side_dist_x; //distance que le rayon parcours jusqu'au premier point d'intersection vertical (=un coté x)
-	double	side_dist_y; //distance que le rayon parcours jusqu'au premier point d'intersection horizontal (= un coté y)
-	double	delta_dist_x; //distance que rayon parcours entre chaque point d'intersection vertical
-	double	delta_dist_y; //distance que le rayon parcours entre chaque point d'intersection horizontal
-	int		step_x; // -1 si doit sauter un carre dans direction x negative, 1 dans la direction x positive
-	int		step_y; // -1 si doit sauter un carre dans la direction y negative, 1 dans la direction y positive
-	int		hit; // 1 si un mur a ete touche, 0 sinon
-	int		side; // 0 si c'est un cote x qui est touche (vertical), 1 si un cote y (horizontal)
-	double	perp_wall_dist; // distance du joueur au mur
-	int		line_height; //hauteur de la ligne a dessiner
-	int		draw_start; //position de debut ou il faut dessiner
-	int		draw_end; //position de fin ou il faut dessiner
+	double	plane_x;
+	double	plane_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	camera_x;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	double	old_dir_x;
 	double	old_plane_x;
 	int		tex_img;

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 13:46:02 by jarthaud          #+#    #+#             */
+/*   Updated: 2023/11/08 13:46:05 by jarthaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <../includes/cub3d.h>
 
@@ -58,7 +69,7 @@ int	fill_colors(char *str, t_data *data)
 		return (free_tabs(tmp), 1);
 	i = -1;
 	if (len_tab(tmp) != 3)
-		return (ft_error("---ERROR IN COLORS---\n"), free_tabs(tmp), 1);
+		return (free_tabs(tmp), 1);
 	while (++i < 3)
 		fill_cf_colors(flag, i, data, tmp);
 	if (flag)

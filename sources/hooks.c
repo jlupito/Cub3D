@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 13:46:55 by jarthaud          #+#    #+#             */
+/*   Updated: 2023/11/08 13:46:57 by jarthaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <../includes/cub3d.h>
 
@@ -34,13 +45,13 @@ int	handle_buttonpress(t_data *data)
 void	rotate(t_data *data, int flag)
 {
 	data->ray->old_dir_x = data->ray->dir_x;
+	data->ray->old_plane_x = data->ray->plane_x;
 	if (flag)
 	{
 		data->ray->dir_x = (data->ray->dir_x * cos(ROTSPEED)) - \
 			(data->ray->dir_y * sin(ROTSPEED));
 		data->ray->dir_y = (data->ray->old_dir_x * sin(ROTSPEED)) + \
 			(data->ray->dir_y * cos(ROTSPEED));
-		data->ray->old_plane_x = data->ray->plane_x;
 		data->ray->plane_x = (data->ray->plane_x * cos(ROTSPEED)) - \
 			(data->ray->plane_y * sin(ROTSPEED));
 		data->ray->plane_y = (data->ray->old_plane_x * sin(ROTSPEED)) + \
@@ -52,7 +63,6 @@ void	rotate(t_data *data, int flag)
 			(data->ray->dir_y * sin(-ROTSPEED));
 		data->ray->dir_y = (data->ray->old_dir_x * sin(-ROTSPEED)) + \
 			(data->ray->dir_y * cos(-ROTSPEED));
-		data->ray->old_plane_x = data->ray->plane_x;
 		data->ray->plane_x = (data->ray->plane_x * cos(-ROTSPEED)) - \
 			(data->ray->plane_y * sin(-ROTSPEED));
 		data->ray->plane_y = (data->ray->old_plane_x * sin(-ROTSPEED)) + \
@@ -60,7 +70,7 @@ void	rotate(t_data *data, int flag)
 	}
 }
 
-void	move_front(t_data *data, int flag) // test avec le 1 et le '1'.
+void	move_front(t_data *data, int flag)
 {
 	if (flag)
 	{
@@ -82,7 +92,7 @@ void	move_front(t_data *data, int flag) // test avec le 1 et le '1'.
 	}
 }
 
-void	move_side(t_data *data, int flag) // test avec le 1 et le '1'.
+void	move_side(t_data *data, int flag)
 {
 	if (flag)
 	{

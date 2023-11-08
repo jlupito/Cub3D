@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 13:47:00 by jarthaud          #+#    #+#             */
+/*   Updated: 2023/11/08 13:50:17 by jarthaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <../includes/cub3d.h>
 
 int	init_data(t_data *data)
@@ -80,13 +92,13 @@ int	init_player_pos(char *str, int y, t_data *data)
 				|| str[i] == 'S') && !data->player)
 		{
 			if (str[i] == 'N')
-				init_pos_nw(data, 1, i, y);
+				init_pos_nw(data, 0, i, y);
 			else if (str[i] == 'W')
 				init_pos_nw(data, 0, i, y);
 			else if (str[i] == 'E')
 				init_pos_se(data, 1, i, y);
 			else if (str[i] == 'S')
-				init_pos_se(data, 0, i, y);
+				init_pos_se(data, 1, i, y);
 			data->player++;
 			return (EXIT_SUCCESS);
 		}
