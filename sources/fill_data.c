@@ -6,27 +6,11 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:02 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 15:35:28 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:53:12 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/cub3d.h>
-
-int	check_args(int ac, char **av)
-{
-	int	i;
-
-	if (ac != 2)
-		return (ft_putendl_fd("--BAD NUMBER OF ARGUMENTS--", 2), EXIT_FAILURE);
-	i = 0;
-	while (av[1][i] != '.' && av[1][i])
-		i++;
-	if (av[1][i + 1] == 'c' && av[1][i + 2] == 'u'
-		&& av[1][i + 3] == 'b' && av[1][i + 4] == '\0')
-		return (EXIT_SUCCESS);
-	else
-		return (ft_putendl_fd("---WRONG TYPE OF MAP---", 2), EXIT_FAILURE);
-}
 
 int	fill_map(char *str, t_data *data, int i)
 {
@@ -46,30 +30,21 @@ int	fill_map(char *str, t_data *data, int i)
 	return (EXIT_SUCCESS);
 }
 
-int	fill_cf_colors(int flag, int i, t_data *data, char **tmp)
+int	fill_cf_colors(int flag, int i, t_data *data, char *tmp)
 {
-	int	x;
-	int	y;
+	int	j;
 
-	y = 0;
-	x = 0;
-	while (tmp[y])
+	j = 0;
+	while (tmp[j] && tmp[j] != '\n')
 	{
-		while (tmp[y][x])
-		{
-			if (ft_isdigit((int)tmp[y][x]))
-			{
-				printf("tu sors avec tmp: %c\n", tmp[y][x]);
-				return (1);
-			}
-			x++;
-		}
-		y++;
+		if (ft_isdigit(tmp[j]))
+			return (1);
+		j++;
 	}
 	if (flag)
-		data->rgb_floor[i] = ft_atoi(tmp[i]);
+		data->rgb_floor[i] = ft_atoi(tmp);
 	else
-		data->rgb_ceiling[i] = ft_atoi(tmp[i]);
+		data->rgb_ceiling[i] = ft_atoi(tmp);
 	return (0);
 }
 
@@ -93,39 +68,42 @@ int	fill_colors(char *str, t_data *data)
 		return (free_tabs(tmp), 1);
 	while (++i < 3)
 	{
-		if (fill_cf_colors(flag, i, data, tmp))
+		if (fill_cf_colors(flag, i, data, tmp[i]))
 			return (free_tabs(tmp), 1);
 	}
 	if (flag)
 		data->rgb_floor[3] = 1;
 	else
 		data->rgb_ceiling[3] = 1;
-	free_tabs(tmp);
-	return (EXIT_SUCCESS);
+	return (free_tabs(tmp), EXIT_SUCCESS);
 }
 
 int	fill_text(char *str, t_data *data)
 {
 	if (!ft_strncmp(str, "NO", 2))
 	{
-		while (*str && *str != '.')
+		str = str + 2;
+		while (*str && ft_isspace(*str))
 			str++;
 		data->img[1].path = ft_strdup_trim(str);
 	}
 	else if (!ft_strncmp(str, "SO", 2))
 	{
+		str = str + 2;
 		while (*str && *str != '.')
 			str++;
 		data->img[2].path = ft_strdup_trim(str);
 	}
 	else if (!ft_strncmp(str, "WE", 2))
 	{
+		str = str + 2;
 		while (*str && *str != '.')
 			str++;
 		data->img[3].path = ft_strdup_trim(str);
 	}
 	else if (!ft_strncmp(str, "EA", 2))
 	{
+		str = str + 2;
 		while (*str && *str != '.')
 			str++;
 		data->img[4].path = ft_strdup_trim(str);

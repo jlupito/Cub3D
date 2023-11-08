@@ -6,11 +6,32 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:20 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 15:10:58 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:54:29 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/cub3d.h>
+
+int	player_inside(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = data->ray->pos_x;
+	y = data->ray->pos_y;
+	if ((is_nothing(data->map_char[y - 1][x]))
+		|| (is_nothing(data->map_char[y + 1][x]))
+	|| (is_nothing(data->map_char[y][x - 1]))
+	|| (is_nothing(data->map_char[y][x + 1]))
+	|| (is_nothing(data->map_char[y + 1][x + 1]))
+	|| (is_nothing(data->map_char[y + 1][x - 1]))
+	|| (is_nothing(data->map_char[y - 1][x + 1]))
+	|| (is_nothing(data->map_char[y - 1][x - 1]))
+	|| (y == 0) || (y == len_tab(data->map_char)))
+		return (EXIT_FAILURE);
+	else
+		return (EXIT_SUCCESS);
+}
 
 int	check_closed_map(t_data *data)
 {
@@ -91,22 +112,6 @@ int	count_map_elements(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	parsing_textures(t_data *data)
-{
-	int	i;
-
-	i = 1;
-	while (i < 5)
-	{
-		if (!(data->img[i].path))
-			return (EXIT_FAILURE);
-		if (test_path_texture(data->img[i].path) == false)
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	parsing(t_data *data)
 {
 	if (check_empty_line(data))
@@ -121,5 +126,7 @@ int	parsing(t_data *data)
 		return (ft_error("---ERROR IN TEXTURES---\n"), EXIT_FAILURE);
 	if (parsing_colors(data))
 		return (ft_error("---ERROR IN COLORS---\n"), EXIT_FAILURE);
+	if (player_inside(data))
+		return (ft_error("---PLAYER OUTSIDE THE MAP---\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

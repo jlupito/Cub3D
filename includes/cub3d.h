@@ -116,6 +116,7 @@ int		check_closed_map(t_data *data);
 int		empty_line(char *str);
 int		check_empty_line(t_data *data);
 int		parsing_colors(t_data *data);
+int		player_inside(t_data *data);
 
 /***********************  UTILS  ************************/
 void	free_tabs(char **tab);
@@ -125,9 +126,7 @@ void	close_all(t_data *data);
 int		len_tab(char **tab);
 int		is_nothing(char c);
 bool	test_path_texture(char *code_texture);
-bool	is_empty(char *str);
 int		ft_isspace(int c);
-
 
 /*********************** ERRORS ************************/
 void	ft_error(char *message);

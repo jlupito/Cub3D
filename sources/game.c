@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:48 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 14:51:53 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:50:17 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ int	game_init(t_data *data)
 	i = -1;
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
-		return (EXIT_FAILURE);
+		return (ft_error("---MLX FAILED YOU BABE---\n"), EXIT_FAILURE);
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
 			WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!data->win_ptr)
-		return (free(data->mlx_ptr), EXIT_FAILURE);
+		return (free(data->mlx_ptr),
+			ft_error("---MLX FAILED YOU BABE---\n"), EXIT_FAILURE);
 	if (text_init(data, i))
-		return (close_all(data), EXIT_FAILURE);
+		return (close_all(data),
+			ft_error("---MLX FAILED YOU BABE---\n"), EXIT_FAILURE);
 	return (0);
 }
 
