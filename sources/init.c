@@ -51,8 +51,8 @@ void	init_pos_nw(t_data *data, int flag, int i, int y)
 
 void	init_pos_se(t_data *data, int flag, int i, int y)
 {
-	data->ray->pos_x = i;
-	data->ray->pos_y = y;
+	data->ray->pos_x = i + 0.5;
+	data->ray->pos_y = y + 0.5;
 	if (flag)
 	{
 		data->ray->dir_x = 1;

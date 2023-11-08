@@ -35,7 +35,7 @@ int	fill_map(char *str, t_data *data, int i)
 	return (EXIT_SUCCESS);
 }
 
-static void	fill_cf_colors(int flag, int i, t_data *data, char **tmp)
+void	fill_cf_colors(int flag, int i, t_data *data, char **tmp)
 {
 	if (flag)
 		data->rgb_floor[i] = ft_atoi(tmp[i]);

@@ -24,15 +24,3 @@ int	save_map(char *infile, t_data *data)
 	(free(line), close(fd));
 	return (0);
 }
-
-// static void	save_map(char *line, t_data *data, int flag)
-// {
-// 	if (flag)
-// 	{
-// 		if (fill_map(line, data, data->index_map))
-// 			data->flag_pars = 1;
-// 		data->index_map++;
-// 	}
-// 	if (!flag)
-// 		data->line_map++;
-// }
