@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:24 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:47:27 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:40:53 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	prep_drawing(t_ray *ray)
 	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
-	if (ray->side == 1 && ray->ray_dir_y < 0)
+	if (ray->side == 0 && ray->ray_dir_x < 0)
 		ray->tex_img = 1;
-	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		ray->tex_img = 2;
-	else if (ray->side == 0 && ray->ray_dir_x < 0)
-		ray->tex_img = 3;
 	else if (ray->side == 0 && ray->ray_dir_x > 0)
+		ray->tex_img = 2;
+	else if (ray->side == 1 && ray->ray_dir_y < 0)
+		ray->tex_img = 3;
+	else if (ray->side == 1 && ray->ray_dir_y > 0)
 		ray->tex_img = 4;
 }
 

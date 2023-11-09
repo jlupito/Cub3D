@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/08 18:12:25 by jarthaud          #+#    #+#             */
+/*   Updated: 2023/11/09 14:47:40 by jarthaud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -10,14 +21,8 @@
 # include <stdbool.h>
 # include <limits.h>
 
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define RED 0xFF0000
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 980
+# define WIN_HEIGHT 640
 # define TEX_WIDTH 100
 # define TEX_HEIGHT 100
 # define ROTSPEED 0.08
@@ -95,8 +100,8 @@ int		init_data(t_data *data);
 int		init_player_pos(char *str, int y, t_data *data);
 void	init_ray_cast(t_ray *ray);
 int		check_args(int ac, char **av);
-void	init_pos_nw(t_data *data, int flag, int i, int y);
-void	init_pos_se(t_data *data, int flag, int i, int y);
+void	init_pos_ns(t_data *data, int flag, int i, int y);
+void	init_pos_ew(t_data *data, int flag, int i, int y);
 
 /************************  MAP  *************************/
 int		fill_colors(char *str, t_data *data);
@@ -119,17 +124,17 @@ int		parsing_colors(t_data *data);
 int		player_inside(t_data *data);
 
 /***********************  UTILS  ************************/
-void	free_tabs(char **tab);
-void	free_all(t_data *data);
-void	free_all2(t_data *data);
-void	close_all(t_data *data);
 int		len_tab(char **tab);
 int		is_nothing(char c);
 bool	test_path_texture(char *code_texture);
 int		ft_isspace(int c);
 
-/*********************** ERRORS ************************/
+/******************** ERRORS / FREE *********************/
 void	ft_error(char *message);
+void	free_tabs(char **tab);
+void	free_all(t_data *data);
+void	free_all2(t_data *data);
+void	close_all(t_data *data);
 
 /********** DRAW ***********/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

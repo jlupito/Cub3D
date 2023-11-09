@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:00 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:50:17 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:34:29 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,43 +41,43 @@ int	init_data(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-void	init_pos_nw(t_data *data, int flag, int i, int y)
+void	init_pos_ns(t_data *data, int flag, int i, int y)
 {
 	data->ray->pos_x = i + 0.5;
 	data->ray->pos_y = y + 0.5;
-	if (flag)
+	if (flag) // N
 	{
 		data->ray->dir_x = 0;
 		data->ray->dir_y = -1;
 		data->ray->plane_x = 0.66;
 		data->ray->plane_y = 0;
 	}
-	else if (!flag)
-	{
-		data->ray->dir_x = -1;
-		data->ray->dir_y = 0;
-		data->ray->plane_x = 0;
-		data->ray->plane_y = 0.66;
-	}
-}
-
-void	init_pos_se(t_data *data, int flag, int i, int y)
-{
-	data->ray->pos_x = i + 0.5;
-	data->ray->pos_y = y + 0.5;
-	if (flag)
-	{
-		data->ray->dir_x = 1;
-		data->ray->dir_y = 0;
-		data->ray->plane_x = 0;
-		data->ray->plane_y = -0.66;
-	}
-	else if (!flag)
+	else if (!flag) // S
 	{
 		data->ray->dir_x = 0;
 		data->ray->dir_y = 1;
 		data->ray->plane_x = -0.66;
 		data->ray->plane_y = 0;
+	}
+}
+
+void	init_pos_ew(t_data *data, int flag, int i, int y)
+{
+	data->ray->pos_x = i + 0.5;
+	data->ray->pos_y = y + 0.5;
+	if (flag) //E
+	{
+		data->ray->dir_x = 1.00;
+		data->ray->dir_y = 0;
+		data->ray->plane_x = 0;
+		data->ray->plane_y = 0.66;
+	}
+	else if (!flag) // W
+	{
+		data->ray->dir_x = -1;
+		data->ray->dir_y = 0;
+		data->ray->plane_x = 0;
+		data->ray->plane_y = -0.66;
 	}
 }
 
@@ -92,13 +92,13 @@ int	init_player_pos(char *str, int y, t_data *data)
 				|| str[i] == 'S') && !data->player)
 		{
 			if (str[i] == 'N')
-				init_pos_nw(data, 0, i, y);
-			else if (str[i] == 'W')
-				init_pos_nw(data, 0, i, y);
-			else if (str[i] == 'E')
-				init_pos_se(data, 1, i, y);
+				init_pos_ns(data, 1, i, y);
 			else if (str[i] == 'S')
-				init_pos_se(data, 1, i, y);
+				init_pos_ns(data, 0, i, y);
+			else if (str[i] == 'E')
+				init_pos_ew(data, 1, i, y);
+			else if (str[i] == 'W')
+				init_pos_ew(data, 0, i, y);
 			data->player++;
 			return (EXIT_SUCCESS);
 		}
