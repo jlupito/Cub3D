@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibourb <alibourb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:06 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 17:07:10 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:57:00 by alibourb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_args(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_error("--BAD NUMBER OF ARGUMENTS--\n"), EXIT_FAILURE);
+	if ((access(av[1], F_OK)) || (access(av[1], R_OK)))
+			return (ft_error("---MAP NOT FOUND---\n"), EXIT_FAILURE);
 	i = 0;
 	while (av[1][i] != '.' && av[1][i])
 		i++;

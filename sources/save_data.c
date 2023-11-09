@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibourb <alibourb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:31 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 16:32:32 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:05:45 by alibourb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 
 static void	save_cf(char *line, t_data *data)
 {
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ',')
+			count++;
+		i++;
+	}
+	if (count != 2)
+		data->flag_pars = 1;
 	if (!colors_filled(data)
 		|| (line[0] == 'F' && data->rgb_floor[3])
 		|| (line[0] == 'C' && data->rgb_ceiling[3]))
