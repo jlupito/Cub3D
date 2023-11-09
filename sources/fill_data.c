@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alibourb <alibourb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:02 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 17:45:50 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:24:29 by alibourb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,15 @@ int	fill_cf_colors(int flag, int i, t_data *data, char *tmp)
 	int	j;
 
 	j = 0;
+	while (tmp && ft_isspace(*tmp))
+		tmp++;
 	while (tmp[j] && tmp[j] != '\n')
 	{
 		if (ft_isdigit(tmp[j]))
 			return (1);
 		j++;
 	}
+
 	if (flag)
 		data->rgb_floor[i] = ft_atoi(tmp);
 	else
