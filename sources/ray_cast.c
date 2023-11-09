@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:24 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/09 17:40:53 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:55:30 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ void	prep_drawing(t_ray *ray)
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 	if (ray->side == 0 && ray->ray_dir_x < 0)
-		ray->tex_img = 1;
+		ray->tex_img = 4; // E
 	else if (ray->side == 0 && ray->ray_dir_x > 0)
-		ray->tex_img = 2;
+		ray->tex_img = 3; // W
 	else if (ray->side == 1 && ray->ray_dir_y < 0)
-		ray->tex_img = 3;
+		ray->tex_img = 2; // S
 	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		ray->tex_img = 4;
+		ray->tex_img = 1; //N
 }
 
 void	calc_texture(t_ray *ray)

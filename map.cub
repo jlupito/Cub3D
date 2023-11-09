@@ -1,10 +1,10 @@
 
 NO ./textures/neon1.xpm
-SO ./textures/neon2.xpm
-WE ./textures/neon3.xpm
+SO ./textures/neon3.xpm
+WE ./textures/neon2.xpm
 EA ./textures/neon4.xpm
 
-C 10,20,102
+C 102,0,102
 F 0,0,5
 
   1111111
@@ -12,7 +12,7 @@ F 0,0,5
 111111111111
 10011  11001
 100011110011
-10000101001
+100N0101001
 10101111111
 11101111
 10000001
