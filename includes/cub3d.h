@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:12:25 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/09 14:47:40 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/10 09:53:41 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define WIN_HEIGHT 640
 # define TEX_WIDTH 100
 # define TEX_HEIGHT 100
-# define ROTSPEED 0.08
-# define MOVESPEED 0.08
+# define ROTSPEED 0.06
+# define MOVESPEED 0.06
 
 typedef struct s_ray {
 	double	pos_x;
