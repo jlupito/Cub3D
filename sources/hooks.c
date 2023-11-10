@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:55 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 13:46:57 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/10 09:31:55 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	handle_keypress(int keysym, t_data *data)
 		exit (0);
 	}
 	if (keysym == XK_Right)
-		rotate(data, 0);
-	if (keysym == XK_Left)
 		rotate(data, 1);
+	if (keysym == XK_Left)
+		rotate(data, 0);
 	if (keysym == XK_w)
 		move_front(data, 1);
 	if (keysym == XK_s)
