@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:00 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/09 17:34:29 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:30:46 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	init_pos_ns(t_data *data, int flag, int i, int y)
 {
 	data->ray->pos_x = i + 0.5;
 	data->ray->pos_y = y + 0.5;
-	if (flag) // N
+	if (flag)
 	{
 		data->ray->dir_x = 0;
 		data->ray->dir_y = -1;
 		data->ray->plane_x = 0.66;
 		data->ray->plane_y = 0;
 	}
-	else if (!flag) // S
+	else if (!flag)
 	{
 		data->ray->dir_x = 0;
 		data->ray->dir_y = 1;
@@ -65,14 +65,14 @@ void	init_pos_ew(t_data *data, int flag, int i, int y)
 {
 	data->ray->pos_x = i + 0.5;
 	data->ray->pos_y = y + 0.5;
-	if (flag) //E
+	if (flag)
 	{
 		data->ray->dir_x = 1.00;
 		data->ray->dir_y = 0;
 		data->ray->plane_x = 0;
 		data->ray->plane_y = 0.66;
 	}
-	else if (!flag) // W
+	else if (!flag)
 	{
 		data->ray->dir_x = -1;
 		data->ray->dir_y = 0;

@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:46:02 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/09 18:29:17 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:31:46 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	fill_cf_colors(int flag, int i, t_data *data, char *tmp)
 			return (1);
 		j++;
 	}
-
 	if (flag)
 		data->rgb_floor[i] = ft_atoi(tmp);
 	else

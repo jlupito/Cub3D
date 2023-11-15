@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:20 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 17:45:26 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:26:25 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	player_inside(t_data *data)
 
 	x = data->ray->pos_x;
 	y = data->ray->pos_y;
-	if ((is_nothing(data->map_char[y - 1][x]))
-		|| (is_nothing(data->map_char[y + 1][x]))
+	if ((x == 0) || (y == 0) || (y == len_tab(data->map_char) - 1)
+		|| (is_nothing(data->map_char[y - 1][x]))
+	|| (is_nothing(data->map_char[y + 1][x]))
 	|| (is_nothing(data->map_char[y][x - 1]))
 	|| (is_nothing(data->map_char[y][x + 1]))
 	|| (is_nothing(data->map_char[y + 1][x + 1]))
 	|| (is_nothing(data->map_char[y + 1][x - 1]))
 	|| (is_nothing(data->map_char[y - 1][x + 1]))
-	|| (is_nothing(data->map_char[y - 1][x - 1]))
-	|| (y == 0) || (y == len_tab(data->map_char)))
+	|| (is_nothing(data->map_char[y - 1][x - 1])))
 		return (EXIT_FAILURE);
 	else
 		return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: jarthaud <jarthaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:47:13 by jarthaud          #+#    #+#             */
-/*   Updated: 2023/11/08 17:09:13 by jarthaud         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:27:53 by jarthaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_empty_line(t_data *data)
 
 int	is_nothing(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n')
+	if (c == ' ' || c == '\t' || c == '\n' || !c)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
